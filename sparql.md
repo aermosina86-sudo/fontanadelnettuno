@@ -121,4 +121,4 @@ The following screenshots show examples of image-related resources retrieved by 
 
 The results show that ArCo and ICCD contain many visual records connected to the Fontana del Nettuno in Bologna. These resources do not all represent the fountain in the same way. Some are postcards, some are photographs, some are negatives, and others are prints or views of the surrounding urban space.
 
-This shows that the Fontana del Nettuno is represented not only as a single cultural site, but also through a wider network of visual resources. However, not every result contains a direct foaf:depiction link, which suggests that image-related information exists in the dataset but is not always represented in a simple or uniform way.
+This shows that the Fontana del Nettuno is represented not only as a single cultural site, but also through a wider network of visual resources. However, not every result contains a direct `foaf:depiction` link, which suggests that image-related information exists in the dataset but is not always represented in a simple or uniform way.
