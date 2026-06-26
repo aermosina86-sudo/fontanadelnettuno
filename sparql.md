@@ -72,11 +72,3 @@ The query returned several relevant IRIs. The most important ones are listed bel
 ### Interpretation of the Results
 
 The results show that ArCo contains more than one resource related to **Fontana del Nettuno**. However, these resources do not all represent the same kind of entity. Some refer to the cultural site itself, while others refer to titles, addresses, units of description, photographs, drawings, or artistic representations of the fountain.
-
-For this reason, the resource selected as the main IRI for the project is:
-
-`http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S015658_Fontana_del_Nettuno`
-
-This IRI was selected because its label directly corresponds to the topic of the project: **“Fontana del Nettuno.”**
-
-The next step is to explore this selected IRI in more detail in order to understand what information ArCo already provides and where possible information gaps may exist.
