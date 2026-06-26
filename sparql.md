@@ -123,3 +123,63 @@ The results show that ArCo and ICCD contain many visual records connected to the
 
 This shows that the Fontana del Nettuno is represented not only as a single cultural site, but also through a wider network of visual resources. However, not every result contains a direct `foaf:depiction` link, which suggests that image-related information exists in the dataset but is not always represented in a simple or uniform way.
 
+## Query 3 — Identifying subjects related to the Fontana del Nettuno
+
+This query was designed to find unique resources that are classified as **Subjects** in the ArCo ontology and whose labels include the words **“Fontana”** and **“Nettuno.”**
+
+By doing this, we aimed to discover whether ArCo contains subject resources related to the Fontana del Nettuno. This is useful because subjects can reveal how the monument is semantically described or referenced in the knowledge graph.
+
+### Explanation of keywords used
+
+**a-cd:Subject**: searches for resources classified as subjects in the ArCo context-description ontology.
+
+**rdfs:label**: retrieves the name or label of each subject.
+
+**FILTER** and **REGEX**: restrict the results to labels containing “Fontana” and “Nettuno.”
+
+**DISTINCT**: removes duplicate results.
+
+### SPARQL Query
+
+```sparql
+PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?subject ?label
+WHERE {
+  ?subject a a-cd:Subject ;
+           rdfs:label ?label .
+
+  FILTER(REGEX(STR(?label), "Fontana", "i"))
+  FILTER(REGEX(STR(?label), "Nettuno", "i"))
+}
+LIMIT 50
+```
+
+### Results
+
+The query returned four subject resources related to the Fontana del Nettuno. Some of them refer directly to the fountain in Bologna, while others connect the fountain to people, places, or visual representations.
+
+![Query 3 results](assets/query3.png)
+
+### Subjects Found
+
+1. `https://w3id.org/arco/resource/Subject/740679cbe96f6c4c7d6c9da040c4d242`
+   Label: “De Boulogne J. (detto Giambologna)/ Fontana Del Nettuno/ Bologna”
+
+2. `https://w3id.org/arco/resource/Subject/1c81f0efabe53549630809ab6fd79047`
+   Label: “Italia - Emilia Romagna - Bologna - Piazza Del Nettuno - Palazzo Re Enzo - Fontana Del Nettuno”
+
+3. `https://w3id.org/arco/resource/Subject/21c4ddfe628b306443993418d67a87e8`
+   Label: “Fontana Del Nettuno A Bologna”
+
+4. `https://w3id.org/arco/resource/Subject/7d3d7dcb35ed1b46b2e2fd34390c3499`
+   Label: “La Fontana Del Nettuno A Bologna Con Passanti E Piccioni”
+
+### Interpretation of the Results
+
+The results show that ArCo does contain subject resources related to the Fontana del Nettuno. This means that the fountain is not only present through cultural property records and image-related resources, but also appears as a subject in the knowledge graph.
+
+However, the subject labels are not completely uniform. Some labels refer directly to the fountain, while others include additional contextual information, such as Bologna, Piazza del Nettuno, Palazzo Re Enzo, Giambologna, or specific visual scenes. This suggests that the topic is represented in ArCo, but its subject representation is distributed across several differently named resources.
+
+For the project, this is useful because it shows both the presence of subject information and a possible semantic gap: the Fontana del Nettuno is represented through multiple subject resources, but there may not be one clearly standardized subject resource that gathers all relevant information about the monument.
