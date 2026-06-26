@@ -164,17 +164,13 @@ The query returned four subject resources related to the Fontana del Nettuno. So
 
 ### Subjects Found
 
-1. `https://w3id.org/arco/resource/Subject/740679cbe96f6c4c7d6c9da040c4d242`
-   Label: “De Boulogne J. (detto Giambologna)/ Fontana Del Nettuno/ Bologna”
+1. [De Boulogne J. (detto Giambologna)/ Fontana Del Nettuno/ Bologna](https://w3id.org/arco/resource/Subject/740679cbe96f6c4c7d6c9da040c4d242)
 
-2. `https://w3id.org/arco/resource/Subject/1c81f0efabe53549630809ab6fd79047`
-   Label: “Italia - Emilia Romagna - Bologna - Piazza Del Nettuno - Palazzo Re Enzo - Fontana Del Nettuno”
+2. [Italia - Emilia Romagna - Bologna - Piazza Del Nettuno - Palazzo Re Enzo - Fontana Del Nettuno](https://w3id.org/arco/resource/Subject/1c81f0efabe53549630809ab6fd79047)
 
-3. `https://w3id.org/arco/resource/Subject/21c4ddfe628b306443993418d67a87e8`
-   Label: “Fontana Del Nettuno A Bologna”
+3. [Fontana Del Nettuno A Bologna](https://w3id.org/arco/resource/Subject/21c4ddfe628b306443993418d67a87e8)
 
-4. `https://w3id.org/arco/resource/Subject/7d3d7dcb35ed1b46b2e2fd34390c3499`
-   Label: “La Fontana Del Nettuno A Bologna Con Passanti E Piccioni”
+4. [La Fontana Del Nettuno A Bologna Con Passanti E Piccioni](https://w3id.org/arco/resource/Subject/7d3d7dcb35ed1b46b2e2fd34390c3499)
 
 ### Interpretation of the Results
 
