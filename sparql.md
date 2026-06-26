@@ -107,13 +107,17 @@ The query returned several image-related resources connected to the Fontana del 
 ### Images
 
 The following screenshots show examples of image-related resources retrieved by the query.
+<div style="display: flex; gap: 15px; align-items: flex-start; flex-wrap: wrap;">
 
-![Fontana image result 1](assets/fontana%201.jpg)
+  <img src="assets/fontana%201.jpg" alt="Fontana image result 1" style="width: 30%; min-width: 180px;">
 
-![Fontana image result 2](assets/fontana%202.jpg)
+  <img src="assets/fontana%202.jpg" alt="Fontana image result 2" style="width: 30%; min-width: 180px;">
 
-![Fontana image result 3](assets/fontana%203.jpg)
-nterpretation of the Results
+  <img src="assets/fontana%203.jpg" alt="Fontana image result 3" style="width: 30%; min-width: 180px;">
+
+</div>
+
+### Interpretation of the Results
 
 The results show that ArCo and ICCD contain many visual records connected to the Fontana del Nettuno in Bologna. These resources do not all represent the fountain in the same way. Some are postcards, some are photographs, some are negatives, and others are prints or views of the surrounding urban space.
 
