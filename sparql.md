@@ -177,5 +177,3 @@ The query returned four subject resources related to the Fontana del Nettuno. So
 The results show that ArCo does contain subject resources related to the Fontana del Nettuno. This means that the fountain is not only present through cultural property records and image-related resources, but also appears as a subject in the knowledge graph.
 
 However, the subject labels are not completely uniform. Some labels refer directly to the fountain, while others include additional contextual information, such as Bologna, Piazza del Nettuno, Palazzo Re Enzo, Giambologna, or specific visual scenes. This suggests that the topic is represented in ArCo, but its subject representation is distributed across several differently named resources.
-
-For the project, this is useful because it shows both the presence of subject information and a possible semantic gap: the Fontana del Nettuno is represented through multiple subject resources, but there may not be one clearly standardized subject resource that gathers all relevant information about the monument.
