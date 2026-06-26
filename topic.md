@@ -13,7 +13,7 @@ layout: default
 ---
 
 # Topic
-
+![Fontana del Nettuno in Bologna](assets/20220511122654-fontana-del-nettuno-bologna-emilia-romagna-shutterstock-410379151.jpg)
 ## Why Fontana del Nettuno?
 
 The **Fontana del Nettuno** was selected as the topic of this project because it is one of the most recognizable cultural landmarks in Bologna. Located in the historic city centre, the fountain has strong artistic, civic, and symbolic value. It is not only a monument, but also an important part of Bologna’s urban identity.
