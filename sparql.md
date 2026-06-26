@@ -51,3 +51,73 @@ The query returned several resources whose labels contain the expression **“Fo
 ### Interpretation of the Results
 
 The results show that ArCo contains more than one resource related to **Fontana del Nettuno**. However, these resources do not all represent the same kind of entity. Some refer to the cultural site itself, while others refer to titles, addresses, units of description, photographs, drawings, or artistic representations of the fountain.
+
+## Query 2 — Finding image-related resources about the Fontana del Nettuno
+
+In this query, the aim was to find different kinds of visual resources related to the **Fontana del Nettuno in Bologna**. Instead of looking only for direct `foaf:depiction` links, the query searches more broadly for image-related records, including photographs, postcards, prints, drawings, negatives, and other visual representations.
+
+This was useful because visual resources in ArCo and ICCD are not always stored only through the `foaf:depiction` property. Sometimes the image-related nature of the resource appears directly in the label, for example through words such as *stampa*, *cartolina*, *positivo*, or *negativo*.
+
+### Explanation of keywords used
+
+**UNION**: combines two search strategies: one for ArCo historic/artistic properties and one for photographic records.
+
+**FILTER** and **REGEX**: search for resources whose labels contain “Fontana,” “Nettuno,” and “Bologna.”
+
+**OPTIONAL**: retrieves the type and depiction only if this information is available.
+
+**DISTINCT**: removes duplicate results.
+
+**LIMIT**: limits the number of results to 50.
+
+### SPARQL Query
+
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT DISTINCT ?image ?label ?type ?depiction
+WHERE {
+  {
+    ?image a arco:HistoricOrArtisticProperty ;
+           rdfs:label ?label .
+  }
+  UNION
+  {
+    ?image rdfs:label ?label .
+    FILTER(REGEX(STR(?image), "fotografico", "i"))
+  }
+
+  FILTER(REGEX(STR(?label), "Fontana", "i"))
+  FILTER(REGEX(STR(?label), "Nettuno", "i"))
+  FILTER(REGEX(STR(?label), "Bologna", "i"))
+
+  OPTIONAL { ?image rdf:type ?type . }
+  OPTIONAL { ?image foaf:depiction ?depiction . }
+}
+LIMIT 50
+
+### Results
+
+The query returned several image-related resources connected to the **Fontana del Nettuno in Bologna**. The results include postcards, prints, photographic positives, negatives, and views of the fountain in its urban context.
+
+![Query 2 results](assets/query%202.png)
+
+### Images
+
+The following screenshots show examples of image-related resources retrieved by the query.
+
+![Fontana image result 1](assets/fontana%201.jpg)
+
+![Fontana image result 2](assets/fontana%202.jpg)
+
+![Fontana image result 3](assets/fontana%203.jpg)
+
+Interpretation of the Results
+
+The results show that ArCo and ICCD contain many visual records connected to the Fontana del Nettuno in Bologna. These resources do not all represent the fountain in the same way. Some are postcards, some are photographs, some are negatives, and others are prints or views of the surrounding urban space.
+
+This shows that the Fontana del Nettuno is represented not only as a single cultural site, but also through a wider network of visual resources. However, not every result contains a direct foaf:depiction link, which suggests that image-related information exists in the dataset but is not always represented in a simple or uniform way.
