@@ -295,7 +295,7 @@ LIMIT 50
 
 The query returned a broad set of ArCo resources whose labels contain the word **“fontana.”**
 
-![Query 5 results](assets/query5.png)
+![Query 5 results](assets/query%505.png)
 
 ### Examples of IRIs Found
 
