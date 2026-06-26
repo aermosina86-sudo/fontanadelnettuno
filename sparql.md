@@ -217,12 +217,7 @@ LIMIT 50
 ### Results
 
 The query returned several resources that match either the standard name **“Fontana del Nettuno”** or the alternative naming pattern connected to **“Gigante.”**
-
-![Query 4 results 1](assets/query4%201.png)
-
-![Query 4 results 2](assets/query4%202.png)
-
-![Query 4 results 3](assets/query4%203.png)
+![Query 4 results](assets/query4.png)
 
 ### Examples of IRIs Found
 
