@@ -100,24 +100,6 @@ WHERE {
 }
 LIMIT 50
 
-### Results
+Results
 
-The query returned several image-related resources connected to the **Fontana del Nettuno in Bologna**. The results include postcards, prints, photographic positives, negatives, and views of the fountain in its urban context.
-
-![Query 2 results](assets/query%202.png)
-
-### Images
-
-The following screenshots show examples of image-related resources retrieved by the query.
-
-![Fontana image result 1](assets/fontana%201.jpg)
-
-![Fontana image result 2](assets/fontana%202.jpg)
-
-![Fontana image result 3](assets/fontana%203.jpg)
-
-Interpretation of the Results
-
-The results show that ArCo and ICCD contain many visual records connected to the Fontana del Nettuno in Bologna. These resources do not all represent the fountain in the same way. Some are postcards, some are photographs, some are negatives, and others are prints or views of the surrounding urban space.
-
-This shows that the Fontana del Nettuno is represented not only as a single cultural site, but also through a wider network of visual resources. However, not every result contains a direct foaf:depiction link, which suggests that image-related information exists in the dataset but is not always represented in a simple or uniform way.
+The query returned several image-related resources connected to the Fontana del Nettuno in Bologna. The results include postcards, prints, photographic positives, negatives, and views of the fountain in its urban context.
