@@ -329,3 +329,77 @@ This query therefore helped us understand that a general search using only the w
 
 This shows why more specific queries are needed when working with SPARQL and cultural heritage data. It also confirms that the Fontana del Nettuno should be studied with more precise label patterns, such as **“Fontana del Nettuno,” “Bologna,”** or related subject resources.
 
+## Query 6 — Investigating used properties for “fontana”
+
+The aim of this query was to understand which properties and values are commonly used to describe entities whose labels contain the word **“fontana”** in the ArCo dataset.
+
+After exploring resources directly related to the **Fontana del Nettuno**, this query broadened the search. The purpose was to compare the selected topic with other fountain-related entities and to identify which RDF properties are commonly used for similar resources. This can help us decide which vocabulary may be useful when proposing enrichment triples for the Fontana del Nettuno.
+
+### Explanation of keywords used
+
+**?property ?value**: retrieves the predicate-object pairs connected to each resource. This allows us to inspect how the resource is described in RDF.
+
+**FILTER** and **REGEX**: restrict the results to labels containing the word “fontana.”
+
+**ORDER BY DESC(?property)**: organizes the results by property name in descending order.
+
+**LIMIT**: limits the number of results so that the output remains readable.
+
+### SPARQL Query
+
+```sparql
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX arco: <https://w3id.org/arco/ontology/arco/> 
+PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
+PREFIX cis: <http://dati.beniculturali.it/cis/> 
+
+SELECT DISTINCT ?cp ?label ?property ?value
+WHERE {  
+  ?cp a arco:HistoricOrArtisticProperty ; 
+      rdfs:label ?label ; 
+      ?property ?value .  
+
+  FILTER(REGEX(STR(?label), "fontana", "i"))  
+}  
+ORDER BY DESC(?property)
+LIMIT 100
+```
+
+### Results
+
+The query returned several ArCo resources whose labels contain the word **“fontana.”** The visible results include both actual fountain-related objects and records where “Fontana” appears as a surname or part of an artist/company name.
+
+
+
+### Examples of results found
+
+Some examples of resources retrieved by the query include:
+
+1. [Abito di gala by Sorelle Fontana](https://w3id.org/arco/resource/HistoricOrArtisticProperty/1201412758)
+   Label: “abito di gala, cavalleresco o civile, da sera, femminile by Sorelle Fontana”
+
+2. [Giardino con fontana](https://w3id.org/arco/resource/HistoricOrArtisticProperty/0500013802-2)
+   Label: “Giardino con fontana”
+
+3. [Fontana della vita](https://w3id.org/arco/resource/HistoricOrArtisticProperty/0500087470-2)
+   Label: “fontana della vita”
+
+4. [Fontana in un giardino](https://w3id.org/arco/resource/HistoricOrArtisticProperty/0800067348-75)
+   Label: “fontana in un giardino, veduta con fontana”
+
+5. [Ritratto di donna by Fontana Roberto](https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900335032-1)
+   Label: “ritratto di donna by Fontana Roberto”
+
+6. [Preghiera di Noè dopo il diluvio by Fontana Prospero](https://w3id.org/arco/resource/HistoricOrArtisticProperty/1200257975-1)
+   Label: “preghiera di Noè dopo il diluvio by Fontana Prospero”
+
+### Interpretation of the Results
+
+The results show that a broad search for the word **“fontana”** retrieves many different kinds of resources. Some are directly relevant because they refer to fountains as artistic, architectural, or decorative objects. For example, resources such as **“Giardino con fontana,” “fontana della vita,”** and **“fontana in un giardino”** are connected to fountain-related subjects or representations.
+
+However, many results are not directly related to fountains. In several cases, **“Fontana”** appears as a surname, such as **Sorelle Fontana**, **Fontana Annibale**, **Fontana Roberto**, or **Fontana Prospero**. These results are not useful for understanding fountains as cultural heritage objects, but they reveal an important limitation of simple keyword-based SPARQL searches.
+
+This query was useful because it showed that the term **“fontana”** alone is too broad. It retrieves both relevant and irrelevant resources. For this reason, more precise filters are necessary when studying the Fontana del Nettuno. Terms such as **“Nettuno,” “Bologna,” “Piazza del Nettuno,”** or specific ArCo subject resources are more effective for identifying relevant data.
+
+The query also helped us inspect the RDF structure of fountain-related resources. By looking at the `?property` and `?value` columns, it becomes possible to see which predicates are commonly used in ArCo descriptions. This is important for the enrichment phase, because proposed RDF triples should use vocabulary that is compatible with the existing structure of the knowledge graph.
