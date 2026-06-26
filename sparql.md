@@ -177,3 +177,85 @@ The query returned four subject resources related to the Fontana del Nettuno. So
 The results show that ArCo does contain subject resources related to the Fontana del Nettuno. This means that the fountain is not only present through cultural property records and image-related resources, but also appears as a subject in the knowledge graph.
 
 However, the subject labels are not completely uniform. Some labels refer directly to the fountain, while others include additional contextual information, such as Bologna, Piazza del Nettuno, Palazzo Re Enzo, Giambologna, or specific visual scenes. This suggests that the topic is represented in ArCo, but its subject representation is distributed across several differently named resources.
+
+## Query 4 — Using UNION to retrieve multiple naming patterns
+
+In this query, we explored whether the **Fontana del Nettuno** appears in ArCo through different naming patterns. In particular, we wanted to compare the standard name **“Fontana del Nettuno”** with the alternative expression **“Gigante”**, which is sometimes associated with the fountain.
+
+The aim of the query was to retrieve resources that contain either one of these naming patterns. This helps us understand whether the monument is represented through different labels, alternative names, or related records in the dataset.
+
+### Explanation of keywords used
+
+**UNION**: combines two alternative search patterns. In this query, it allows us to retrieve resources whose labels contain either “Fontana del Nettuno” or “Gigante.”
+
+**FILTER** and **REGEX**: search for specific words inside the labels.
+
+**DISTINCT**: removes duplicate results.
+
+**LIMIT**: limits the number of results to 50.
+
+### SPARQL Query
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?resource ?label
+WHERE {
+  {
+    ?resource rdfs:label ?label .
+    FILTER(REGEX(?label, "Fontana del Nettuno", "i"))
+  }
+  UNION
+  {
+    ?resource rdfs:label ?label .
+    FILTER(REGEX(?label, "Gigante", "i"))
+  }
+}
+LIMIT 50
+```
+
+### Results
+
+The query returned several resources that match either the standard name **“Fontana del Nettuno”** or the alternative naming pattern connected to **“Gigante.”**
+
+![Query 4 results 1](assets/query4%201.png)
+
+![Query 4 results 2](assets/query4%202.png)
+
+![Query 4 results 3](assets/query4%203.png)
+
+### Examples of IRIs Found
+
+1. [Fontana del Nettuno, detta del Gigante](http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante)
+   Label: “Fontana del Nettuno, detta del Gigante”
+
+2. [Fontana del Nettuno](http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S015658_Fontana_del_Nettuno)
+   Label: “Fontana del Nettuno”
+
+3. [Unit of description: Fontana del Nettuno, detta del Gigante](http://dati.beniculturali.it/iccd/schede/resource/uod/S001886)
+   Label: “Fontana del Nettuno, detta del Gigante”
+
+4. [Unit of description: Fontana del Nettuno](http://dati.beniculturali.it/iccd/schede/resource/uod/S015658)
+   Label: “Fontana del Nettuno”
+
+5. [Address resource for Fontana del Nettuno, detta del Gigante](http://dati.beniculturali.it/iccd/schede/resource/Address/Indirizzo_della_sede_di_S001886_Fontana_del_Nettuno,_detta_del_Gigante)
+   Label: “Indirizzo della Sede di Fontana del Nettuno, detta del Gigante”
+
+6. [Bologna. La Piazza Maggiore con la fontana del Nettuno](https://w3id.org/arco/resource/Title/1400042198-bologna-la-piazza-maggiore-con-la-fontana-del-nettuno)
+   Label: “Bologna. La Piazza Maggiore con la fontana del Nettuno”
+
+7. [Giambologna. La Fontana del Nettuno. Bologna](https://w3id.org/arco/resource/Title/0800365640-giambologna-la-fontana-del-nettuno-bologna)
+   Label: “Giambologna. La Fontana del Nettuno. Bologna”
+
+### Interpretation of the Results
+
+The results show that ArCo contains resources using different naming patterns related to the Fontana del Nettuno. Some resources use the simple label **“Fontana del Nettuno,”** while others use the longer expression **“Fontana del Nettuno, detta del Gigante.”**
+
+This is important because it suggests that the same monument, or closely related resources, may appear in the dataset under different names. The query therefore helps us identify possible alternative denominations and related records.
+
+At the same time, the results also show that the expression **“Fontana del Nettuno”** is not unique in the dataset. The query retrieved resources related to fountains in other Italian cities, such as Trento, Florence, and Rome. It also retrieved different types of resources, including cultural sites, units of description, addresses, photographic records, titles, and historic or artistic properties.
+
+For this reason, the query required manual filtering. The most relevant results for this project are the resources connected to Bologna, especially the resources labelled **“Fontana del Nettuno”** and **“Fontana del Nettuno, detta del Gigante.”**
+
+This query is useful for the project because it shows that the representation of the Fontana del Nettuno is distributed across several labels and resource types. It also suggests a possible information gap: the relationship between the standard name **“Fontana del Nettuno”** and the alternative denomination **“detta del Gigante”** could be made more explicit in RDF.
+
