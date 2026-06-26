@@ -47,27 +47,6 @@ The query returned several resources whose labels contain the expression **“Fo
 
 ![Query 1 results](assets/query1-results.png)
 
-### IRIs Found
-
-The query returned several relevant IRIs. The most important ones are listed below.
-
-1. **Fontana del Nettuno, detta del Gigante**
-   `http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante`
-
-2. **Fontana del Nettuno**
-   `http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S015658_Fontana_del_Nettuno`
-
-3. **Unit of description for Fontana del Nettuno**
-   `http://dati.beniculturali.it/iccd/schede/resource/uod/S015658`
-
-4. **Address resource for Fontana del Nettuno**
-   `http://dati.beniculturali.it/iccd/schede/resource/Address/Indirizzo_della_sede_di_S015658_Fontana_del_Nettuno`
-
-5. **Title related to Fontana del Nettuno in Bologna**
-   `https://w3id.org/arco/resource/Title/1400042198-bologna-la-piazza-maggiore-con-la-fontana-del-nettuno`
-
-6. **Historic or Artistic Property related to Fontana del Nettuno in Bologna**
-   `https://w3id.org/arco/resource/HistoricOrArtisticProperty/0300639021`
 
 ### Interpretation of the Results
 
