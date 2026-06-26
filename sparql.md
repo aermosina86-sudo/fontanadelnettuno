@@ -253,7 +253,7 @@ At the same time, the results also show that the expression **“Fontana del Net
 
 For this reason, the query required manual filtering. The most relevant results for this project are the resources connected to Bologna, especially the resources labelled **“Fontana del Nettuno”** and **“Fontana del Nettuno, detta del Gigante.”**
 
-This query is useful for the project because it shows that the representation of the Fontana del Nettuno is distributed across several labels and resource types. It also suggests a possible information gap: the relationship between the standard name **“Fontana del Nettuno”** and the alternative denomination **“detta del Gigante”** could be made more explicit in RDF.
+This query shows that the representation of the Fontana del Nettuno is distributed across several labels and resource types. It also suggests a possible information gap: the relationship between the standard name **“Fontana del Nettuno”** and the alternative denomination **“detta del Gigante”** could be made more explicit in RDF.
 
 ## Query 5 — General search for “fontana” entities
 
@@ -327,5 +327,5 @@ However, the query also returned results where **“Fontana”** is not used as 
 
 This query therefore helped us understand that a general search using only the word **“fontana”** is too broad. It retrieves both relevant and irrelevant results. Manual filtering is necessary to distinguish between actual fountain-related cultural properties and records where “Fontana” refers to a person, family name, or company.
 
-For the project, this result is useful because it shows why more specific queries are needed when working with SPARQL and cultural heritage data. It also confirms that the Fontana del Nettuno should be studied with more precise label patterns, such as **“Fontana del Nettuno,” “Bologna,”** or related subject resources.
+This shows why more specific queries are needed when working with SPARQL and cultural heritage data. It also confirms that the Fontana del Nettuno should be studied with more precise label patterns, such as **“Fontana del Nettuno,” “Bologna,”** or related subject resources.
 
