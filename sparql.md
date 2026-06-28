@@ -54,9 +54,27 @@ The results show that ArCo contains more than one resource related to **Fontana 
 
 ## Query 2 — Searching for resources related to Fontana del Nettuno in Bologna
 
-After identifying the main Bologna resource, another query was used to search more broadly for resources whose labels contain both **“Fontana del Nettuno”** and **“Bologna.”**
+After identifying the main Bologna resource, another query was used to search more broadly for resources whose labels contain both **“Fontana del Nettuno”** and **“Bologna.”** The aim was to see whether other types of resources in ArCo also refer to the Fontana del Nettuno in Bologna.
 
-Unlike the previous query, this query did not restrict the search to `arco:HistoricOrArtisticProperty`. The aim was to see whether other types of resources in ArCo also refer to the Fontana del Nettuno in Bologna.
+### Explanation of keywords used
+
+**rdfs:label**: retrieves the label or name of each resource. In this query, it is used to find resources whose labels contain the expressions **“Fontana del Nettuno”** and **“Bologna.”**
+
+**?resource**: represents any resource in the knowledge graph. This variable is used instead of `?cp` because the query is not limited to one specific class, such as `arco:HistoricOrArtisticProperty`.
+
+**?label**: represents the textual label connected to each resource.
+
+**FILTER**: restricts the results according to specific conditions. In this query, it is used to keep only resources whose labels contain the required words.
+
+**REGEX**: searches for a textual pattern inside a string. Here, it searches for the expressions **“Fontana del Nettuno”** and **“Bologna”** inside the label.
+
+**STR(?label)**: converts the label into a string so that `REGEX` can search inside it.
+
+**"i"**: makes the search case-insensitive. This means the query can find the words regardless of uppercase or lowercase letters.
+
+**DISTINCT**: removes duplicate results from the output.
+
+**LIMIT**: restricts the number of results to 30, making the output easier to read and analyze.
 
 ### SPARQL Query
 
