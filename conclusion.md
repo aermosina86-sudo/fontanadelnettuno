@@ -22,44 +22,29 @@ The project showed that ArCo already contains different kinds of information abo
 
 ---
 
-## 🧠 SPARQL and ArCo Ontology
+## SPARQL and ArCo Ontology
 
 Working with SPARQL and ArCo was one of the most important parts of the project.
 
-SPARQL made it possible to search the knowledge graph in a structured way and to move from broad exploration to more precise results. Through different queries, we learned how to use important SPARQL keywords such as:
+SPARQL made it possible to search the knowledge graph in a structured way and to move from broad exploration to more precise results. Through different queries, we learned how to use important SPARQL keywords such as **SELECT**, **DISTINCT**, **FILTER**, **REGEX**, **OPTIONAL**, **UNION**, **ORDER BY**, **LIMIT**, **ASK**, and **CONSTRUCT**.
 
-```text
-SELECT
-DISTINCT
-FILTER
-REGEX
-OPTIONAL
-UNION
-ORDER BY
-LIMIT
-ASK
-CONSTRUCT
-```
+The project showed that keyword selection is very important. A broad search using only **fontana** returned mixed results, including actual fountains, artists, surnames, families, and companies. This demonstrated that a simple keyword search is not always enough in a knowledge graph.
 
-The project showed that keyword selection is very important. A broad search using only **“fontana”** returned mixed results, including actual fountains, artists, surnames, families, and companies. This demonstrated that a simple keyword search is not always enough in a knowledge graph.
+More precise searches, such as **Fontana del Nettuno** and **Fontana del Nettuno** together with **Bologna**, helped identify the resource that best represents the Bologna monument:
 
-More precise searches, such as **“Fontana del Nettuno”** and **“Fontana del Nettuno” + “Bologna,”** helped identify the resource that best represents the Bologna monument:
-
-```text
 http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante
-```
 
-The SPARQL analysis also showed that location information is essential for disambiguation, because the name **“Fontana del Nettuno”** can refer to fountains in different cities.
+The SPARQL analysis also showed that location information is essential for disambiguation, because the name **Fontana del Nettuno** can refer to fountains in different cities.
 
 ---
 
-## 🔍 Main Information Gaps Identified
+## Main Information Gaps Identified
 
 The project identified three main gaps.
 
-The first gap was **location ambiguity**. The label **“Fontana del Nettuno”** is not unique, so the Bologna resource needs to be clearly distinguished from other Neptune fountains in other cities.
+The first gap was **location ambiguity**. The label **Fontana del Nettuno** is not unique, so the Bologna resource needs to be clearly distinguished from other Neptune fountains in other cities.
 
-The second gap was **keyword ambiguity**. The word **“fontana”** can mean a fountain, but it can also appear as a surname, family name, artist name, or company name. This made manual filtering necessary.
+The second gap was **keyword ambiguity**. The word **fontana** can mean a fountain, but it can also appear as a surname, family name, artist name, or company name. This made manual filtering necessary.
 
 The third gap was the **lack of a clear cultural description**. The explored ArCo results contained factual and documentary information, but they did not clearly express the fountain’s symbolic, civic, artistic, and urban significance.
 
@@ -67,17 +52,11 @@ These gaps showed that the problem was not the complete absence of data. Rather,
 
 ---
 
-## 🤖 Large Language Models
+## Large Language Models
 
 The project compared the outputs of **ChatGPT** and **Gemini**.
 
-The LLMs were tested through different prompting techniques:
-
-```text
-Zero-shot prompting
-Few-shot prompting
-Chain-of-thought prompting
-```
+The LLMs were tested through different prompting techniques: **zero-shot prompting**, **few-shot prompting**, and **chain-of-thought prompting**.
 
 Zero-shot prompts were useful for testing how the models responded to simple questions, such as whether there are Fontana del Nettuno monuments in other cities.
 
@@ -87,13 +66,13 @@ Chain-of-thought prompting was the most useful technique for generating cultural
 
 The comparison showed that the two models had different strengths.
 
-ChatGPT produced more structured and cautious answers. It was especially useful for generating RDF triples and SPARQL `CONSTRUCT` queries that worked successfully in the endpoint.
+ChatGPT produced more structured and cautious answers. It was especially useful for generating RDF triples and SPARQL **CONSTRUCT** queries that worked successfully in the endpoint.
 
-Gemini produced richer and more ambitious ideas, especially for external links, semantic typing, and cultural interpretation. However, some of its SPARQL `CONSTRUCT` queries returned empty results or caused a timeout. This showed that Gemini’s outputs were useful for inspiration, but required more verification before being used.
+Gemini produced richer and more ambitious ideas, especially for external links, semantic typing, and cultural interpretation. However, some of its SPARQL **CONSTRUCT** queries returned empty results or caused a timeout. This showed that Gemini’s outputs were useful for inspiration, but required more verification before being used.
 
 ---
 
-## 🔗 RDF Triple Generation
+## RDF Triple Generation
 
 The final part of the project transformed the identified gaps into proposed RDF enrichment triples.
 
@@ -103,19 +82,9 @@ The RDF triples were created for three purposes:
 2. To clarify the meaning of **fontana** as a water-related cultural object.
 3. To add a cultural interpretation of the Fontana del Nettuno.
 
-The successful `CONSTRUCT` queries generated RDF statements for the proposed enrichments. These triples do not modify ArCo directly. They show how the resource could be enriched in a future version of the knowledge graph.
+The successful **CONSTRUCT** queries generated RDF statements for the proposed enrichments. These triples do not modify ArCo directly. They show how the resource could be enriched in a future version of the knowledge graph.
 
-An important methodological point was the distinction between:
-
-```text
-confirmed baseline information
-```
-
-and:
-
-```text
-proposed enrichment triples
-```
+An important methodological point was the distinction between **confirmed baseline information** and **proposed enrichment triples**.
 
 Confirmed information included the resource label and its connection to the Bologna site. Proposed enrichment included alternative labels, disambiguation notes, project-level concepts, and cultural descriptions.
 
@@ -123,7 +92,7 @@ This distinction is important because LLM-generated information should not be tr
 
 ---
 
-## 🌍 Future Developments
+## Future Developments
 
 This project opens several possibilities for future development.
 
