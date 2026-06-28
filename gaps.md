@@ -39,7 +39,7 @@ Query 7 then helped distinguish between similar resources by checking place-rela
 Fontana del Nettuno, detta del Gigante → BOLOGNA
 Fontana del Nettuno → ROMA
 ```
-
+![Query 1 highlighted results](assets/query1highlighted.jpg)
 
 ### Interpretation
 
