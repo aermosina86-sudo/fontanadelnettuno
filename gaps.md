@@ -41,8 +41,7 @@ WHERE {
 }
 LIMIT 50
 ```
-
-![Query 1 highlighted results](assets/query1highlighted.png)
+![Query 1 highlighted results](assets/query1highlighted.jpg)
 
 The results showed that the expression **“Fontana del Nettuno”** appears in several different records. This already suggested that manual filtering and further disambiguation were necessary.
 
@@ -166,8 +165,6 @@ This resource was selected because it is connected to **BOLOGNA**.
 
 This gap is important for RDF enrichment because the connection between the main resource and its Bologna location should be easy to retrieve and interpret. A clearer location-based representation would reduce ambiguity and help users or automated systems distinguish the **Fontana del Nettuno in Bologna** from other resources with the same or similar name.
 
-
-![Query 1 highlighted results](assets/query1highlighted.jpg)
 
 
 
