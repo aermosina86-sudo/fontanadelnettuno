@@ -1,6 +1,6 @@
 ---
-layout: default
----
+
+## layout: default
 
 # Fontana del Nettuno
 
@@ -20,28 +20,15 @@ Below, each challenge is described together with the solution adopted during the
 
 ---
 
-## 🧩 Understanding how SPARQL works
+## Understanding how SPARQL works
 
 At the beginning of the project, one of the main difficulties was understanding how to write correct SPARQL queries.
 
 SPARQL requires precise syntax and logical structure. Even a small mistake in a prefix, punctuation mark, or query pattern can change the result or make the query fail.
 
-This was especially challenging because the project required the use of several SPARQL keywords, such as:
+This was especially challenging because the project required the use of several SPARQL keywords, such as `SELECT`, `DISTINCT`, `FILTER`, `REGEX`, `OPTIONAL`, `UNION`, `ORDER BY`, `LIMIT`, `ASK`, and `CONSTRUCT`.
 
-```text
-SELECT
-DISTINCT
-FILTER
-REGEX
-OPTIONAL
-UNION
-ORDER BY
-LIMIT
-ASK
-CONSTRUCT
-```
-
-### ✅ Solution
+## Solution
 
 The solution was to start with simple queries and then gradually make them more complex.
 
@@ -51,7 +38,7 @@ This helped us understand how to move from general exploration to more precise r
 
 ---
 
-## 🔍 Identifying the correct Fontana del Nettuno resource
+## Identifying the correct Fontana del Nettuno resource
 
 A major challenge was identifying the correct ArCo resource for the **Fontana del Nettuno in Bologna**.
 
@@ -59,33 +46,23 @@ The expression **“Fontana del Nettuno”** is not unique. It can refer to Nept
 
 In ArCo, a search for **“Fontana del Nettuno”** returned several resources. These resources did not all represent the same object. Some were title resources, some were image-related records, some were subject resources, and some were cultural site resources.
 
-### ✅ Solution
+## Solution
 
 To solve this problem, we refined the queries step by step.
 
-First, we searched broadly for:
+First, we searched broadly for **“Fontana del Nettuno.”**
 
-```text
-Fontana del Nettuno
-```
-
-Then we searched for:
-
-```text
-Fontana del Nettuno + Bologna
-```
+Then we searched for **“Fontana del Nettuno” + “Bologna.”**
 
 Finally, we used the site information to identify the most relevant Bologna resource:
 
-```text
-http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante
-```
+`http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante`
 
 This showed that location information was necessary to disambiguate the resource.
 
 ---
 
-## 🏛️ Dealing with location ambiguity
+## Dealing with location ambiguity
 
 The project showed that **location ambiguity** was one of the main gaps.
 
@@ -93,87 +70,49 @@ The label **“Fontana del Nettuno”** alone is not enough to identify the Bolo
 
 This was also confirmed through LLM prompting. When we asked whether there are other Fontana del Nettuno monuments in Italy, both ChatGPT and Gemini recognized that several cities have Neptune fountains.
 
-### ✅ Solution
+## Solution
 
 The solution was to treat location as a key part of the enrichment.
 
-In the RDF triples, we proposed clearer labels such as:
+In the RDF triples, we proposed clearer labels such as **“Fontana del Nettuno di Bologna”** and **“Fountain of Neptune in Bologna.”**
 
-```text
-Fontana del Nettuno di Bologna
-Fountain of Neptune in Bologna
-```
-
-We also proposed connecting the main resource more explicitly to the Bologna site resource through properties such as:
-
-```text
-dcterms:spatial
-schema:location
-```
+We also proposed connecting the main resource more explicitly to the Bologna site resource through properties such as `dcterms:spatial` and `schema:location`.
 
 This helps distinguish the Bologna fountain from other fountains with the same name.
 
 ---
 
-## 🧠 The word “fontana” was too broad
+## The word “fontana” was too broad
 
 Another challenge appeared when we searched for the word **“fontana.”**
 
 At first, this seemed like a useful keyword because the project was about a fountain. However, the results showed that **fontana** does not always mean a fountain.
 
-The search also returned names such as:
-
-```text
-Sorelle Fontana
-Fontana Roberto
-Fontana Prospero
-Fontana Luigi
-Maurizio Nicolò Fontana
-Fontana Pietro
-Ditta Fontanarte
-```
+The search also returned names such as **Sorelle Fontana**, **Fontana Roberto**, **Fontana Prospero**, **Fontana Luigi**, **Maurizio Nicolò Fontana**, **Fontana Pietro**, and **Ditta Fontanarte**.
 
 This showed that **Fontana** can be a surname, artist name, family name, or company name.
 
-### ✅ Solution
+## Solution
 
 The solution was to avoid relying only on the keyword **“fontana.”**
 
-Instead, we used more precise search patterns, such as:
-
-```text
-Fontana del Nettuno
-Fontana del Nettuno + Bologna
-```
+Instead, we used more precise search patterns, such as **“Fontana del Nettuno”** and **“Fontana del Nettuno” + “Bologna.”**
 
 We also used LLMs to classify whether the results referred to fountains, people, or companies. This helped us understand that keyword-based search in a knowledge graph requires manual filtering and semantic interpretation.
 
 ---
 
-
-## 💬 Engineering effective LLM prompts
+## Engineering effective LLM prompts
 
 Another challenge was creating prompts that produced useful answers.
 
-Simple prompts sometimes gave very general answers. For example, asking only:
-
-```text
-Where is Fontana del Nettuno?
-```
-
-usually produced a short answer about Bologna, but did not fully explain the ambiguity of the name.
+Simple prompts sometimes gave very general answers. For example, asking only **“Where is Fontana del Nettuno?”** usually produced a short answer about Bologna, but did not fully explain the ambiguity of the name.
 
 For this reason, different prompting techniques were necessary.
 
-### ✅ Solution
+## Solution
 
-We used three types of prompting:
-
-```text
-Zero-shot prompting
-Few-shot prompting
-Chain-of-thought prompting
-```
+We used three types of prompting: **zero-shot prompting**, **few-shot prompting**, and **chain-of-thought prompting**.
 
 Zero-shot prompting was useful for testing the model’s first answer.
 
@@ -183,8 +122,7 @@ Chain-of-thought prompting was the most useful for cultural interpretation becau
 
 ---
 
-
-## 🧪 Testing RDF triples with CONSTRUCT queries
+## Testing RDF triples with CONSTRUCT queries
 
 Another challenge was testing the generated RDF triples.
 
@@ -194,7 +132,7 @@ The ChatGPT-based `CONSTRUCT` queries worked successfully and generated RDF stat
 
 The Gemini-based queries were more ambitious, but some returned empty results or caused a timeout.
 
-### ✅ Solution
+## Solution
 
 We compared the two models carefully.
 
@@ -206,15 +144,13 @@ For this reason, the final RDF triples were mainly based on the working ChatGPT-
 
 ---
 
-
-## 🛠️ Technical problems with GitHub Pages
+## Technical problems with GitHub Pages
 
 There were also practical challenges while building the GitHub Pages website.
 
 Some images did not load because the filename in the Markdown page did not exactly match the uploaded image filename. In other cases, the image was not in the correct `assets` folder.
 
-
-### ✅ Solution
+## Solution
 
 The solution was to rename image files clearly and upload them to the `assets` folder.
 
