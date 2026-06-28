@@ -8,7 +8,7 @@
 
 [🏠 Home](index.html) | [🏛️ Topic](topic.html) | [🛠️ Methodology](methodology.html) | [📊 SPARQL & Results](sparql.html) | [🔍 Identifying Gaps](gaps.html) | [💬 LLM Prompts](prompts.html) | [🔗 RDF Triples](triples.html) | ⚠️ Challenges | [✅ Conclusion](conclusion.html)
 
----
+
 
 # Challenges Faced During the Project
 
@@ -16,7 +16,7 @@ During the development of this KE4H project on the **Fontana del Nettuno in Bolo
 
 Below, each challenge is described together with the solution adopted during the project.
 
----
+
 
 ## Understanding how SPARQL works
 
@@ -34,7 +34,7 @@ First, we used broad label searches with `rdfs:label`, `FILTER`, and `REGEX`. Th
 
 This helped us understand how to move from general exploration to more precise resource identification.
 
----
+
 
 ## Identifying the correct Fontana del Nettuno resource
 
@@ -58,7 +58,7 @@ Finally, we used the site information to identify the most relevant Bologna reso
 
 This showed that location information was necessary to disambiguate the resource.
 
----
+
 
 ## Dealing with location ambiguity
 
@@ -78,7 +78,7 @@ We also proposed connecting the main resource more explicitly to the Bologna sit
 
 This helps distinguish the Bologna fountain from other fountains with the same name.
 
----
+
 
 ## The word fontana was too broad
 
@@ -98,7 +98,7 @@ Instead, we used more precise search patterns, such as **Fontana del Nettuno** a
 
 We also used LLMs to classify whether the results referred to fountains, people, or companies. This helped us understand that keyword-based search in a knowledge graph requires manual filtering and semantic interpretation.
 
----
+
 
 ## Engineering effective LLM prompts
 
@@ -118,7 +118,7 @@ Few-shot prompting was useful for classification tasks, such as distinguishing *
 
 Chain-of-thought prompting was the most useful for cultural interpretation because it guided the model through a structured analysis of the monument.
 
----
+
 
 ## Testing RDF triples with CONSTRUCT queries
 
@@ -140,7 +140,7 @@ Gemini's queries often used broader searches, exact labels, external vocabularie
 
 For this reason, the final RDF triples were mainly based on the working ChatGPT-style queries, while Gemini's output was discussed as an alternative proposal.
 
----
+
 
 ## Technical problems with GitHub Pages
 
@@ -156,7 +156,7 @@ The solution was to rename image files clearly and upload them to the `assets` f
 
 This made the website more stable and easier to manage.
 
----
+
 
 # Final consideration
 
