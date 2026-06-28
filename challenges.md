@@ -1,6 +1,6 @@
 ---
-
-## layout: default
+layout: default
+---
 
 # Fontana del Nettuno
 
