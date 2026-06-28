@@ -77,22 +77,6 @@ Requirements:
 
 ---
 
-# LLM outputs
-
-## ChatGPT result
-
-![ChatGPT RDF triples](assets/chatgpt-rdf-triples.png)
-
-ChatGPT proposed a cautious RDF model. It separated confirmed information from proposed enrichment and used the selected Fontana del Nettuno resource directly. Its `CONSTRUCT` queries were simpler and easier to test.
-
-## Gemini result
-
-![Gemini RDF triples](assets/gemini-rdf-triples.png)
-
-Gemini proposed a more ambitious model. It suggested stronger semantic typing, external authority links such as Wikidata and DBpedia, and more interpretive annotation properties. These ideas were useful, but some queries were harder to verify and did not work reliably in the endpoint.
-
----
-
 # 1. Triple set for Gap 1: Location Ambiguity
 
 ## Missing information
@@ -615,9 +599,14 @@ This confirms an important methodological point of the project: LLMs can help ge
 # Final consideration
 
 The proposed RDF triples show how the representation of the **Fontana del Nettuno in Bologna** could be enriched.
+# LLM outputs
 
-The ChatGPT-based triples were more practical because their `CONSTRUCT` queries worked successfully in the SPARQL endpoint. They were therefore used as the main final enrichment proposal.
+## ChatGPT result
 
-The Gemini-based triples were useful as alternative ideas. They suggested external authority links, stronger classification, and richer cultural annotation. However, they were not adopted directly because their `CONSTRUCT` queries either returned empty results or caused a timeout, and some claims required further verification.
+ChatGPT proposed a cautious RDF model. It separated confirmed information from proposed enrichment and used the selected Fontana del Nettuno resource directly. Its `CONSTRUCT` queries were simpler and easier to test. The ChatGPT-based triples were more practical because their `CONSTRUCT` queries worked successfully in the SPARQL endpoint. They were therefore used as the main final enrichment proposal.
+
+## Gemini result
+
+Gemini proposed a more ambitious model. It suggested stronger semantic typing, external authority links such as Wikidata and DBpedia, and more interpretive annotation properties. These ideas were useful, but some queries were harder to verify and did not work reliably in the endpoint. The Gemini-based triples were useful as alternative ideas. They suggested external authority links, stronger classification, and richer cultural annotation. However, they were not adopted directly because their `CONSTRUCT` queries either returned empty results or caused a timeout, and some claims required further verification.
 
 This confirms the central point of the project: LLMs can support Knowledge Graph enrichment, but their outputs must be tested, corrected, and evaluated by humans before being used as RDF enrichment.
