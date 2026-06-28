@@ -213,28 +213,10 @@ There were also practical challenges while building the GitHub Pages website.
 
 Some images did not load because the filename in the Markdown page did not exactly match the uploaded image filename. In other cases, the image was not in the correct `assets` folder.
 
-GitHub Pages is strict with filenames. For example, these are different:
-
-```text
-query6. png
-Query6. png
-query 6. png
-query6. PNG
-```
 
 ### ✅ Solution
 
 The solution was to rename image files clearly and upload them to the `assets` folder.
-
-For example:
-
-```text
-construct-location-result. png
-construct-keyword-result. png
-construct-cultural-description-result. png
-construct-failed-empty. png
-construct-timeout. png
-```
 
 Then the images were inserted using this Markdown format:
 
