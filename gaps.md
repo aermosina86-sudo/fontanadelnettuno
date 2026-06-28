@@ -40,9 +40,6 @@ Fontana del Nettuno, detta del Gigante → BOLOGNA
 Fontana del Nettuno → ROMA
 ```
 
-![Query 1 results](assets/query1.png)
-
-![Query 7 location evidence](assets/query7.png)
 
 ### Interpretation
 
