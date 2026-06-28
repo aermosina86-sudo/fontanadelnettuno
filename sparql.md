@@ -421,7 +421,7 @@ LIMIT 100
 The query returned several ArCo resources whose labels contain the word **“fontana.”** The results include both actual fountain-related objects and records where **Fontana** appears as a surname or part of an artist/family name.
 
 ![Query 6 full results](assets/query6-full.png)
-
+![Query 6 full results](assets/query6.2-full.png)
 ### Examples of results found
 
 Some examples of resources retrieved by the query include:
