@@ -402,9 +402,6 @@ WHERE {
 
 This query did not work successfully. One attempt produced a timeout error.
 
-![Gemini timeout result](assets/construct-timeout.png)
-
-The query was more difficult for the endpoint because it searched more broadly through resources instead of using the already selected Fontana del Nettuno IRI directly.
 
 ---
 
