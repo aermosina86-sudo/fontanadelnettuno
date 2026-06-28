@@ -205,6 +205,7 @@ WHERE {
   ?site rdfs:label "BOLOGNA"@it .
 }
 ```
+![Location ambiguity CONSTRUCT result](assets/construct-location-resultgemini.png)
 
 This query did not work successfully in the endpoint. One reason is that the site relation found in our SPARQL exploration used `cis:hasSite`, while the Gemini query used `arco-location:hasSite`. The query also depended on exact label matching, which can be too restrictive.
 
