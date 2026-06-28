@@ -145,6 +145,7 @@ WHERE {
 ```
 
 The query returned:
+
 ![Location ASK result](assets/true.png)
 
 The result `true` confirms that ArCo contains at least one resource labelled **“Fontana del Nettuno”** that is connected to **ROMA**. This supports the location ambiguity gap because it shows that the label alone does not automatically identify the Bologna monument.
