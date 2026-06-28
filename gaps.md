@@ -165,7 +165,7 @@ This resource was selected because it is connected to **BOLOGNA**.
 
 This gap is important for RDF enrichment because the connection between the main resource and its Bologna location should be easy to retrieve and interpret. A clearer location-based representation would reduce ambiguity and help users or automated systems distinguish the **Fontana del Nettuno in Bologna** from other resources with the same or similar name.
 
-## Identification of the Main Gap: Ambiguity of the Word “Fontana”
+## Gap 2 — Ambiguity of the Word “Fontana”
 
 On the basis of the previous SPARQL queries, we identified one main information gap related to the ambiguity of the word **“fontana.”**
 
@@ -187,17 +187,6 @@ For example, the query returned results such as:
 
 These results show that a broad search using only **“fontana”** produces mixed results. Some of them are relevant because they refer to actual fountains or fountain-related objects. Others are not directly relevant to the monument, because **Fontana** is used as a name.
 
-### Explanation of the keywords used
-
-The query used `FILTER` and `REGEX` to search for the word **“fontana”** inside labels.
-
-`FILTER` is used to restrict the results according to a condition.
-
-`REGEX` is used to search for a word or pattern inside a text.
-
-In this case, the condition was that the label had to contain the word **“fontana.”**
-
-The query also used `LIMIT` to restrict the number of results and make the output easier to read.
 
 ![General fontana results](assets/query6.png)
 
