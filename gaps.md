@@ -42,7 +42,7 @@ WHERE {
 LIMIT 50
 ```
 
-![Query 1 results](assets/query1.png)
+![Query 1 results](assets/query1highlighted.png)
 
 The results showed that the expression **“Fontana del Nettuno”** appears in several different records. This already suggested that manual filtering and further disambiguation were necessary.
 
