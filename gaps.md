@@ -165,6 +165,74 @@ This resource was selected because it is connected to **BOLOGNA**.
 
 This gap is important for RDF enrichment because the connection between the main resource and its Bologna location should be easy to retrieve and interpret. A clearer location-based representation would reduce ambiguity and help users or automated systems distinguish the **Fontana del Nettuno in Bologna** from other resources with the same or similar name.
 
+## Identification of the Main Gap: Ambiguity of the Word “Fontana”
+
+On the basis of the previous SPARQL queries, we identified one main information gap related to the ambiguity of the word **“fontana.”**
+
+At the beginning of the project, we searched for resources containing the word **“fontana”** in their labels. The aim was to understand how ArCo represents fountain-related resources and to see whether the **Fontana del Nettuno** could be found through a general keyword search.
+
+However, the results showed that the word **“fontana”** does not always refer to a fountain. In ArCo, it can also appear as a surname, an artist name, a family name, or a company name.
+
+For example, the query returned results such as:
+
+* **Giardino con fontana**
+* **fontana della vita**
+* **Bologna. La Piazza Maggiore con la fontana del Nettuno**
+* **abito di gala by Sorelle Fontana**
+* **Sibilla by Fontana Annibale**
+* **ritratto di donna by Fontana Roberto**
+* **preghiera di Noè dopo il diluvio by Fontana Prospero**
+* **Santo by Fontana Luigi**
+* **Ditta Fontanarte**
+
+These results show that a broad search using only **“fontana”** produces mixed results. Some of them are relevant because they refer to actual fountains or fountain-related objects. Others are not directly relevant to the monument, because **Fontana** is used as a name.
+
+### Explanation of the keywords used
+
+The query used `FILTER` and `REGEX` to search for the word **“fontana”** inside labels.
+
+`FILTER` is used to restrict the results according to a condition.
+
+`REGEX` is used to search for a word or pattern inside a text.
+
+In this case, the condition was that the label had to contain the word **“fontana.”**
+
+The query also used `LIMIT` to restrict the number of results and make the output easier to read.
+
+![General fontana results](assets/query6.png)
+
+### Interpretation of the results
+
+The results show that the keyword **“fontana”** is too broad. It does not identify only fountains. It also retrieves people, artists, fashion houses, and other resources where **Fontana** is part of a name.
+
+This creates a problem for knowledge graph exploration because users or automated systems may retrieve irrelevant resources if they search only with the word **“fontana.”**
+
+For this reason, more precise search patterns were necessary in the project. Instead of using only **“fontana,”** we searched for:
+
+```text
+Fontana del Nettuno
+```
+
+and later:
+
+```text
+Fontana del Nettuno + Bologna
+```
+
+This helped narrow the results and identify the resource related to the **Fontana del Nettuno in Bologna**.
+
+### Final consideration
+
+The gap is not that ArCo lacks information about fountains. The problem is that a general keyword search can return ambiguous and mixed results.
+
+This gap is important because it shows why disambiguation is necessary in cultural heritage knowledge graphs. To identify the correct resource, it is not enough to search for a single word. The query must include more precise information, such as the full monument name and the location.
+
+In this project, the ambiguity of the word **“fontana”** led us to refine the search strategy and focus on the Bologna resource:
+
+```text
+http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante
+```
+
 
 
 
