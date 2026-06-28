@@ -76,13 +76,10 @@ Requirements:
 
 ## ChatGPT result
 
-![ChatGPT RDF triples](assets/chatgpt-rdf-triples.png)
-
 ChatGPT proposed a cautious RDF model. It separated confirmed information from proposed enrichment and used the selected Fontana del Nettuno resource directly. Its `CONSTRUCT` queries were simpler and easier to test in the SPARQL endpoint.
 
 ## Gemini result
 
-![Gemini RDF triples](assets/gemini-rdf-triples.png)
 
 Gemini proposed a more ambitious model. It suggested external links to Wikidata and DBpedia, stronger semantic typing, and additional external vocabulary. This was useful as an idea, but some parts were more difficult to verify and did not work reliably in the SPARQL endpoint.
 
