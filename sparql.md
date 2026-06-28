@@ -103,6 +103,7 @@ LIMIT 50
 ### Results
 
 The query returned several image-related resources connected to the Fontana del Nettuno in Bologna. The results include postcards, prints, photographic positives, negatives, and views of the fountain in its urban context.
+
 ![Query 2 results](assets/query%202.png)
 ### Images
 
