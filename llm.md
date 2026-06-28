@@ -50,7 +50,7 @@ The aim was to test whether the model could recognize that **“Fontana del Nett
 
 ## ChatGPT Answer
 
-![ChatGPT other cities](assets/chatgpt-other-cities.png)
+![ChatGPT other cities](assets/chatgpt-other-cities.jpg)
 
 ## Gemini Answer
 
@@ -87,7 +87,7 @@ This prompt is useful because it tests whether the model assumes that **Fontana 
 
 ## ChatGPT Answer
 
-![ChatGPT location](assets/chatgpt-location.png)
+![ChatGPT location](assets/chatgpt-location.jpg)
 
 ## Gemini Answer
 
@@ -140,7 +140,7 @@ The purpose was to test whether the model could classify the mixed results found
 
 ## ChatGPT Answer
 
-![ChatGPT classification](assets/chatgpt-classification.png)
+![ChatGPT classification](assets/chatgpt-classification.jpg)
 
 ## Gemini Answer
 
