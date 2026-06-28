@@ -218,13 +218,6 @@ Some images did not load because the filename in the Markdown page did not exact
 
 The solution was to rename image files clearly and upload them to the `assets` folder.
 
-Then the images were inserted using this Markdown format:
-
-`![Location CONSTRUCT result](assets/construct-location-result.png)`
-
-This made the website more stable and easier to manage.
-
-
 This made the website more stable and easier to manage.
 
 ---
