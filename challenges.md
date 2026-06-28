@@ -216,10 +216,10 @@ Some images did not load because the filename in the Markdown page did not exact
 GitHub Pages is strict with filenames. For example, these are different:
 
 ```text
-query6.png
-Query6.png
-query 6.png
-query6.PNG
+query6. png
+Query6. png
+query 6. png
+query6. PNG
 ```
 
 ### ✅ Solution
@@ -229,11 +229,11 @@ The solution was to rename image files clearly and upload them to the `assets` f
 For example:
 
 ```text
-construct-location-result.png
-construct-keyword-result.png
-construct-cultural-description-result.png
-construct-failed-empty.png
-construct-timeout.png
+construct-location-result. png
+construct-keyword-result. png
+construct-cultural-description-result. png
+construct-failed-empty. png
+construct-timeout. png
 ```
 
 Then the images were inserted using this Markdown format:
