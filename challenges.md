@@ -1,14 +1,14 @@
 ---
-layout: default
----
+
+## layout: default
 
 # Fontana del Nettuno
 
 ## Enriching Cultural Heritage Knowledge with ArCo and Large Language Models
 
-[View on GitHub] (https://github.com/aermosina86-sudo/fontanadelnettuno)
+[View on GitHub](https://github.com/aermosina86-sudo/fontanadelnettuno)
 
-[Home](index.html) | [Topic](topic.html) | [Methodology](methodology.html) | [SPARQL & Results](sparql.html) | [Identifying Gaps](gaps.html) | [LLM Prompts](prompts.html) | [RDF Triples](triples.html) | Challenges | [Conclusion](conclusion.html)
+[🏠 Home](index.html) | [🏛️ Topic](topic.html) | [🛠️ Methodology](methodology.html) | [📊 SPARQL & Results](sparql.html) | [🔍 Identifying Gaps](gaps.html) | [💬 LLM Prompts](prompts.html) | [🔗 RDF Triples](triples.html) | ⚠️ Challenges | [✅ Conclusion](conclusion.html)
 
 ---
 
