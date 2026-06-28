@@ -223,108 +223,23 @@ In this project, the ambiguity of the word **“fontana”** led us to refine th
 http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante
 ```
 
-## Gap 3 — Alternative Name Embedded in the Label
+## Gap 3 — Missing Cultural Description
 
-A second gap identified in the project concerns the alternative denomination of the **Fontana del Nettuno in Bologna**.
+On the basis of the SPARQL exploration, we identified one main information gap related to the cultural description of the **Fontana del Nettuno in Bologna**.
 
-During the SPARQL exploration, the main Bologna resource was identified as:
+The previous queries showed that ArCo contains structured information about the monument. The resource is connected to a site resource labelled **BOLOGNA**, and other queries retrieved related titles, subject resources, and image-related records. This means that the monument is present in the knowledge graph.
 
-```text
-http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante
-```
+However, the information found is mainly factual or documentary. The explored resources provide labels, IRIs, site information, images, titles, and related records, but they do not provide a clear descriptive explanation of the fountain’s cultural significance.
 
-The label of this resource is:
+In other words, the gap is not that ArCo completely lacks information about the Fontana del Nettuno. The gap is that the cultural meaning of the monument is not clearly expressed in a human-readable or interpretive way.
 
-```text
-Fontana del Nettuno, detta del Gigante
-```
-
-This is important because the expression **“detta del Gigante”** suggests that the monument is also known by another denomination connected to the word **“Gigante.”**
-
-To investigate how this expression appears in the RDF description, we searched for property-value pairs of the main resource containing the word **“Gigante.”**
-
-### Query
-
-```sparql
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT DISTINCT ?property ?value
-WHERE {
-  <http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante>
-      ?property ?value .
-
-  FILTER(REGEX(STR(?value), "Gigante", "i"))
-}
-ORDER BY ?property
-LIMIT 50
-```
-
-### Explanation of the keywords used
-
-`SELECT DISTINCT` was used to retrieve unique property-value pairs.
-
-`?property` represents the RDF property connected to the main resource.
-
-`?value` represents the value of that property.
-
-`FILTER` was used to restrict the results.
-
-`REGEX` was used to search for the word **“Gigante”** inside the values.
-
-`STR(?value)` converts the value into a string so that the textual search can be applied.
-
-`ORDER BY` was used to organize the results by property.
-
-`LIMIT` was used to keep the output manageable.
-
-### Result
-
-![Gigante property query](assets/gigante-property-query.png)
-
-The query returned two relevant results.
-
-First, the resource has a `cis:hasSite` relation pointing to a site resource whose IRI contains the expression **“Fontana del Nettuno, detta del Gigante.”**
-
-Second, the resource has an `rdfs:label` with the value:
-
-```text
-Fontana del Nettuno, detta del Gigante
-```
-
-This confirms that the expression **“detta del Gigante”** is present in the RDF description of the resource.
-
-### Further inspection of the site resource
-
-By clicking on the site IRI returned by `cis:hasSite`, we found that the site resource is labelled:
-
-```text
-BOLOGNA
-```
-
-The site page also shows that this site is connected back to the main resource through `cis:isSiteOf`.
-
-![Bologna site resource](assets/bologna-site-resource.png)
-
-This confirms that the resource **Fontana del Nettuno, detta del Gigante** is connected to Bologna through a site resource.
+![Main resource properties](assets/main-resource-properties.png)
 
 ### Interpretation
 
-The result shows that information about the alternative denomination is present, but mainly inside the full textual label:
+The result shows that the main resource contains structured information, but the explored properties do not provide a clear cultural description of the fountain.
 
-```text
-Fontana del Nettuno, detta del Gigante
-```
+This is important because the Fontana del Nettuno is not only a physical monument. It is also a culturally significant landmark in Bologna. It has artistic, urban, symbolic, and civic value. However, this type of information is difficult to retrieve from the RDF description explored in this project.
 
-In the explored results, **“detta del Gigante”** does not appear as a separate and independent alternative name. It is embedded inside the full label and inside resource IRIs.
-
-The gap is therefore not a complete absence of information. The gap is that the alternative denomination is not clearly separated in a structured, machine-readable way.
-
-### Final consideration
-
-This gap is relevant for RDF enrichment because alternative names can support search and disambiguation. A user might search for **“Gigante”** or **“Fontana del Gigante”**, but this information is currently visible mainly as part of a longer label.
-
-
-
-
-
+For this reason, the main gap identified in the project is the absence of an explicit cultural-description statement.
 
