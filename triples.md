@@ -16,19 +16,24 @@
 
 ## Aim of this section
 
-After identifying the main information gaps in the ArCo representation of the **Fontana del Nettuno in Bologna**, we used Large Language Models to help us generate possible RDF enrichment triples.
+After identifying the main information gaps in the ArCo representation of the **Fontana del Nettuno in Bologna**, we asked Large Language Models to help us generate possible RDF triples.
 
-The aim was not to modify ArCo directly. Instead, the aim was to create **candidate RDF triples** showing how the missing or unclear information could be represented in a more explicit way.
+The aim was not to modify ArCo directly. Instead, the aim was to create **candidate enrichment triples** showing how the missing or unclear information could be represented in RDF.
 
-The triples proposed in this section should therefore be understood as **project-level enrichment proposals**, not as existing triples already present in ArCo.
-
-The three gaps addressed are:
+The three gaps addressed in this section are:
 
 1. **Location ambiguity**: the label **“Fontana del Nettuno”** can refer to fountains in different cities.
 2. **Keyword ambiguity**: the word **“fontana”** can refer to a fountain, but also to a surname, artist name, family name, or company name.
 3. **Missing cultural description**: the explored ArCo resources contain factual and documentary information, but not a clear cultural interpretation of the monument’s symbolic, civic, and urban meaning.
 
-Both **ChatGPT** and **Gemini** were asked to propose RDF triples and SPARQL `CONSTRUCT` queries. However, after testing the generated queries, the results were different. The queries based on ChatGPT’s proposal worked successfully, while the queries proposed by Gemini either returned empty results or caused a timeout. For this reason, the final triples are mainly based on the working ChatGPT-style queries.
+Both **ChatGPT** and **Gemini** were asked to propose RDF triples and SPARQL `CONSTRUCT` queries. Their answers were then tested in the SPARQL endpoint.
+
+The results were different:
+
+* the **ChatGPT-based CONSTRUCT queries worked** and generated RDF statements;
+* the **Gemini-based CONSTRUCT queries were more ambitious**, but some returned empty results or caused a timeout.
+
+For this reason, both outputs are documented below, but the final evaluation gives priority to the triples that worked correctly in the SPARQL endpoint.
 
 ---
 
@@ -72,16 +77,19 @@ Requirements:
 
 ---
 
-# ChatGPT and Gemini outputs
+# LLM outputs
 
 ## ChatGPT result
 
-ChatGPT proposed a cautious RDF model. It separated confirmed information from proposed enrichment and used the selected Fontana del Nettuno resource directly. Its `CONSTRUCT` queries were simpler and easier to test in the SPARQL endpoint.
+![ChatGPT RDF triples](assets/chatgpt-rdf-triples.png)
+
+ChatGPT proposed a cautious RDF model. It separated confirmed information from proposed enrichment and used the selected Fontana del Nettuno resource directly. Its `CONSTRUCT` queries were simpler and easier to test.
 
 ## Gemini result
 
+![Gemini RDF triples](assets/gemini-rdf-triples.png)
 
-Gemini proposed a more ambitious model. It suggested external links to Wikidata and DBpedia, stronger semantic typing, and additional external vocabulary. This was useful as an idea, but some parts were more difficult to verify and did not work reliably in the SPARQL endpoint.
+Gemini proposed a more ambitious model. It suggested stronger semantic typing, external authority links such as Wikidata and DBpedia, and more interpretive annotation properties. These ideas were useful, but some queries were harder to verify and did not work reliably in the endpoint.
 
 ---
 
@@ -91,25 +99,21 @@ Gemini proposed a more ambitious model. It suggested external links to Wikidata 
 
 The first gap concerns **location ambiguity**.
 
-The expression **“Fontana del Nettuno”** is not unique. It can refer to Neptune fountains in different Italian cities, such as Bologna, Florence, Rome, Naples, or Messina.
+The expression **“Fontana del Nettuno”** is not unique. It can refer to Neptune fountains in several Italian cities, such as Bologna, Florence, Rome, Naples, or Messina.
 
-In ArCo, the resource selected for this project is:
+In this project, the selected ArCo resource is:
 
 ```text
 http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante
 ```
 
-The SPARQL exploration showed that this resource is connected to a site resource labelled **BOLOGNA**.
-
-However, because the name **“Fontana del Nettuno”** can refer to different monuments, the location information should be made more explicit. This would help users and automated systems distinguish the Bologna fountain from other Neptune fountains.
+The SPARQL exploration showed that this resource is connected to a site resource labelled **BOLOGNA**. However, because the same name can refer to different fountains, the Bologna location should be made clearer.
 
 ---
 
-## ChatGPT proposal
+## ChatGPT triples for Gap 1
 
-ChatGPT proposed adding alternative labels and a disambiguation note. This was useful because the enrichment does not invent a new place. It only makes the already identified Bologna location clearer.
-
-## Final selected RDF triples
+ChatGPT proposed adding alternative labels and a disambiguation note. This approach is cautious because it does not invent a new location. It only makes the already identified Bologna location easier to understand.
 
 ```turtle
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -132,19 +136,17 @@ ex:location-ambiguity-note
     skos:scopeNote "The label 'Fontana del Nettuno' is ambiguous because it may refer to Neptune fountains in different cities. This enrichment identifies the selected resource as the Fontana del Nettuno located in Bologna."@en .
 ```
 
-## Explanation
+### Explanation
 
-The `skos:altLabel` triples add alternative labels that include **Bologna**. This makes the resource easier to identify.
+The `skos:altLabel` triples add alternative labels that include **Bologna**.
 
-The `dcterms:spatial` and `schema:location` triples connect the main resource to the Bologna site resource using standard vocabularies.
+The `dcterms:spatial` and `schema:location` triples connect the main resource to the Bologna site resource.
 
-The local property `ex:hasDisambiguationNote` connects the resource to an explanatory note about the ambiguity.
+The local property `ex:hasDisambiguationNote` connects the resource to a note explaining why the disambiguation is needed.
 
 ---
 
-## ChatGPT CONSTRUCT query
-
-This was the working query used for Gap 1.
+## ChatGPT CONSTRUCT query for Gap 1
 
 ```sparql
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
@@ -174,19 +176,53 @@ WHERE {
 LIMIT 1
 ```
 
-## Result
+### ChatGPT result
 
-![Location ambiguity CONSTRUCT result](assets/construct-location-result.png)
+![ChatGPT location CONSTRUCT result](assets/construct-location-result.png)
 
-The query generated **9 RDF statements**. This means the `CONSTRUCT` query successfully produced a small RDF graph for the proposed location-disambiguation enrichment.
+This query generated **9 RDF statements**, so it was successfully executed in the SPARQL endpoint.
 
 ---
 
-## Gemini proposal and result
+## Gemini triples for Gap 1
 
-Gemini proposed a different and more ambitious solution. It suggested connecting the site to a Wikidata entity for Bologna and linking the ArCo resource to external records through `owl:sameAs`.
+Gemini proposed a more ambitious solution. It suggested linking the site to a standard city entity and linking the ArCo resource to external authority files.
 
-Example of Gemini’s proposed query:
+```turtle
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix clv: <https://w3id.org/italia/onto/CLV/> .
+@prefix arco-core: <https://w3id.org/arco/ontology/core/> .
+@prefix arco-location: <https://w3id.org/arco/ontology/location/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix ex-site: <http://dati.beniculturali.it/iccd/schede/resource/Site/> .
+@prefix ex-cul: <http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/> .
+
+ex-cul:S001886_Fontana_del_Nettuno,_detta_del_Gigante
+    a arco-core:CulturalInstituteOrSite ;
+    rdfs:label "Fontana del Nettuno, detta del Gigante"@it ;
+    arco-location:hasSite ex-site:Sito_di_S001886_Fontana_del_Nettuno,_detta_del_Gigante .
+
+ex-site:Sito_di_S001886_Fontana_del_Nettuno,_detta_del_Gigante
+    a clv:Site ;
+    rdfs:label "BOLOGNA"@it ;
+    clv:hasCity wd:Q10143 .
+
+ex-cul:S001886_Fontana_del_Nettuno,_detta_del_Gigante
+    owl:sameAs wd:Q1418858 ,
+               <http://dbpedia.org/resource/Fountain_of_Neptune,_Bologna> .
+```
+
+### Explanation
+
+Gemini’s proposal is semantically rich because it links the resource to external authority files such as Wikidata and DBpedia. This could help global disambiguation.
+
+However, this proposal requires additional verification. In particular, the `owl:sameAs` relation is strong because it states that two resources identify the same entity. For this reason, it should not be used unless the equivalence has been carefully checked.
+
+---
+
+## Gemini CONSTRUCT query for Gap 1
 
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -205,11 +241,14 @@ WHERE {
   ?site rdfs:label "BOLOGNA"@it .
 }
 ```
-![Location ambiguity CONSTRUCT result](assets/construct-location-resultgemini.png)
 
-This query did not work successfully in the endpoint. One reason is that the site relation found in our SPARQL exploration used `cis:hasSite`, while the Gemini query used `arco-location:hasSite`. The query also depended on exact label matching, which can be too restrictive.
+### Gemini result
 
-For this reason, Gemini’s query was not adopted as the final version.
+![Gemini location CONSTRUCT result](assets/gemini-location-result.png)
+
+This query did not work successfully in the endpoint. The result was empty.
+
+One possible reason is that the site relation found during our SPARQL exploration was `cis:hasSite`, while Gemini used `arco-location:hasSite`. Another reason is that the query depends on an exact label with a language tag, which may not match the stored literal exactly.
 
 ---
 
@@ -219,7 +258,7 @@ For this reason, Gemini’s query was not adopted as the final version.
 
 The second gap concerns the ambiguity of the word **“fontana.”**
 
-A broad SPARQL search for **“fontana”** returned mixed results. Some were relevant because they referred to fountains or fountain-related objects. Others were not directly relevant because **Fontana** appeared as a surname, family name, artist name, or company name.
+A broad SPARQL search for **“fontana”** returned mixed results. Some referred to actual fountains, while others referred to people, artists, families, or companies named **Fontana**.
 
 Examples included:
 
@@ -232,17 +271,13 @@ Examples included:
 * **Fontana Pietro**
 * **Ditta Fontanarte**
 
-This shows that the keyword **“fontana”** is not precise by itself. It needs semantic disambiguation.
+This showed that the keyword **“fontana”** is not precise by itself.
 
 ---
 
-## ChatGPT proposal
+## ChatGPT triples for Gap 2
 
-ChatGPT proposed creating a small project-level SKOS concept explaining the difference between **fontana as a water feature** and **Fontana as a proper name**.
-
-This was useful because this gap is methodological. It does not add a new historical fact about the monument. Instead, it documents why manual filtering was necessary.
-
-## Final selected RDF triples
+ChatGPT proposed creating a small project-level SKOS concept to distinguish **fontana as a water feature** from **Fontana as a proper name**.
 
 ```turtle
 @prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
@@ -266,19 +301,15 @@ ex:fountain-cultural-site
     skos:broader ex:fontana-as-water-feature .
 ```
 
-## Explanation
+### Explanation
 
-The concept `ex:fontana-as-water-feature` clarifies the meaning of **fontana** in this project.
+This is a methodological enrichment. It does not add a new historical fact about the monument. Instead, it records the ambiguity observed during the SPARQL exploration.
 
-The concept `ex:fountain-cultural-site` classifies the selected resource as a fountain-related cultural site.
-
-The `skos:scopeNote` explains that the word **fontana** should not be confused with **Fontana** as a surname, family name, artist name, or company name.
+The concept `ex:fontana-as-water-feature` explains that in this project **fontana** refers to a fountain or water-related monument, not to a person or company named Fontana.
 
 ---
 
-## ChatGPT CONSTRUCT query
-
-This was the working query used for Gap 2.
+## ChatGPT CONSTRUCT query for Gap 2
 
 ```sparql
 PREFIX skos:    <http://www.w3.org/2004/02/skos/core#>
@@ -309,19 +340,46 @@ WHERE {
 LIMIT 1
 ```
 
-## Result
+### ChatGPT result
 
-![Keyword ambiguity CONSTRUCT result](assets/construct-keyword-result.png)
+![ChatGPT keyword ambiguity CONSTRUCT result](assets/construct-keyword-result.png)
 
-The query generated **10 RDF statements**. The result shows the main resource connected to the concept **fontana as water feature**, while the concept explains that this meaning should not be confused with **Fontana** as a proper name.
+This query generated **10 RDF statements**, so it worked successfully.
 
 ---
 
-## Gemini proposal and result
+## Gemini triples for Gap 2
 
-Gemini proposed a different solution based on stronger semantic typing with external resources.
+Gemini proposed a different solution based on explicit semantic typing. It suggested distinguishing fountains from people or organizations by assigning different external classes.
 
-Example of Gemini’s proposed query:
+```turtle
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix ex-agent: <http://dati.beniculturali.it/iccd/schede/resource/Agent/> .
+@prefix ex-cul: <http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/> .
+
+ex-cul:S001886_Fontana_del_Nettuno,_detta_del_Gigante
+    a dbo:Fountain ,
+      wd:Q483453 .
+
+ex-agent:Sorelle_Fontana
+    a dbo:FashionDesigner ,
+      wd:Q43229 .
+
+ex-agent:Fontana_Prospero
+    a dbo:Artist ,
+      wd:Q5733 .
+```
+
+### Explanation
+
+Gemini’s proposal is useful because it directly addresses the ambiguity between **fontana as a fountain** and **Fontana as a proper name**.
+
+However, it also introduces new or assumed IRIs for agents such as `ex-agent:Sorelle_Fontana` and `ex-agent:Fontana_Prospero`. These IRIs were not verified in our ArCo exploration, so this version is less safe for the final triples.
+
+---
+
+## Gemini CONSTRUCT query for Gap 2
 
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -338,17 +396,15 @@ WHERE {
 }
 ```
 
-This query was conceptually interesting because it tried to classify the resource as a fountain. However, it was less suitable for the final project because it introduced external classes and depended on broader endpoint searching.
+### Gemini result
 
-One Gemini-based attempt returned an empty HTML Microdata document:
+![Gemini keyword ambiguity CONSTRUCT result](assets/gemini-keyword-result.png)
 
-![Empty CONSTRUCT result](assets/construct-failed-empty.png)
+This query did not work successfully. One attempt produced a timeout error.
 
-Another attempt produced a timeout error:
+![Gemini timeout result](assets/construct-timeout.png)
 
-![Timeout result](assets/construct-timeout.png)
-
-For this reason, Gemini’s version was not used as the final RDF model for this gap.
+The query was more difficult for the endpoint because it searched more broadly through resources instead of using the already selected Fontana del Nettuno IRI directly.
 
 ---
 
@@ -358,21 +414,17 @@ For this reason, Gemini’s version was not used as the final RDF model for this
 
 The third gap concerns the absence of a clear cultural description.
 
-The SPARQL exploration showed that ArCo contains several types of information about the Fontana del Nettuno, such as labels, site information, title resources, image-related records, and subject resources.
+The SPARQL exploration showed that ArCo contains factual and documentary information about the Fontana del Nettuno, such as labels, site information, title resources, image-related records, and subject resources.
 
-However, the explored resources did not provide a clear cultural explanation of the fountain’s symbolic, civic, artistic, and urban significance.
+However, the explored resources did not clearly provide a cultural explanation of the fountain’s symbolic, civic, artistic, and urban significance.
 
-For this reason, LLMs were used to generate possible cultural descriptions. The final description was then shortened and checked manually before being transformed into RDF triples.
+For this reason, the LLMs were used to generate candidate cultural descriptions. These descriptions were then manually shortened and checked before being converted into RDF triples.
 
 ---
 
-## ChatGPT proposal
+## ChatGPT triples for Gap 3
 
-ChatGPT proposed adding a cultural description and connecting the resource to a separate interpretation node. This was useful because interpretation is not the same as a simple factual label.
-
-The final version therefore represents cultural meaning as an interpretation linked to the main resource.
-
-## Final selected RDF triples
+ChatGPT proposed adding a cultural description and connecting the resource to a separate interpretation node.
 
 ```turtle
 @prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
@@ -396,21 +448,19 @@ ex:cultural-interpretation-fontana-nettuno-bologna
     prov:wasDerivedFrom <https://www.italia.it/en/emilia-romagna/bologna/fountain-neptune> .
 ```
 
-## Explanation
+### Explanation
 
-The `dcterms:description` triple adds a short cultural description to the main resource.
+The `dcterms:description` triple adds a cultural description to the main resource.
 
-The property `a-cd:isSubjectOfInterpretation` links the fountain to a separate interpretation node.
+The `a-cd:isSubjectOfInterpretation` triple links the fountain to a separate interpretation node.
 
-The interpretation node is typed as `a-cd:Interpretation` and contains a description of the fountain’s civic and symbolic meaning.
+The interpretation node is typed as `a-cd:Interpretation`. It includes a short explanation of the fountain’s civic and symbolic meaning.
 
-The `dcterms:source` and `prov:wasDerivedFrom` triples make the enrichment more transparent because they show that the description is based on external sources and human verification, not only on the LLM output.
+The `dcterms:source` and `prov:wasDerivedFrom` triples make the enrichment transparent because they show that the interpretation is based on external sources and human verification.
 
 ---
 
-## ChatGPT CONSTRUCT query
-
-This was the working query used for Gap 3.
+## ChatGPT CONSTRUCT query for Gap 3
 
 ```sparql
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
@@ -441,19 +491,39 @@ WHERE {
 LIMIT 1
 ```
 
-## Result
+### ChatGPT result
 
-![Cultural description CONSTRUCT result](assets/construct-cultural-description-result.png)
+![ChatGPT cultural description CONSTRUCT result](assets/construct-cultural-description-result.png)
 
-The query generated **10 RDF statements**. The result shows a proposed cultural description and a structured interpretation node connected to the main Fontana del Nettuno resource.
+This query generated **10 RDF statements**, so it worked successfully.
 
 ---
 
-## Gemini proposal and result
+## Gemini triples for Gap 3
 
-Gemini proposed a more narrative and ambitious cultural enrichment. It used properties such as `skos:scopeNote`, `skos:historyNote`, and `skos:editorialNote`.
+Gemini proposed using SKOS annotation properties to add cultural interpretation directly to the main resource.
 
-Example of Gemini’s proposed query:
+```turtle
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ex-cul: <http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/> .
+
+ex-cul:S001886_Fontana_del_Nettuno,_detta_del_Gigante
+    skos:scopeNote "Symbol of papal power and governance, commissioned by Cardinal Legate Charles Borromeo to celebrate the election of Pope Pius IV."@en ;
+    skos:historyNote "Functions as a visual and physical anchor of the civic center, intentionally positioning the power of the church adjacent to Palazzo d'Accursio."@en ;
+    skos:editorialNote "A premier example of Italian Mannerist sculpture, showcasing Giambologna's dynamic, multi-viewpoint composition (figura serpentinata)."@en .
+```
+
+### Explanation
+
+Gemini’s proposal was useful because it directly addressed the missing cultural-description gap. It added symbolic, historical, and artistic notes.
+
+However, some of the statements were too specific and would require additional verification before being used. For example, claims about exact patronage or interpretation should not be inserted into RDF unless supported by a reliable source.
+
+For this reason, the final project used the more cautious ChatGPT-style model with a separate interpretation node and source information.
+
+---
+
+## Gemini CONSTRUCT query for Gap 3
 
 ```sparql
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -469,24 +539,44 @@ WHERE {
 }
 ```
 
-This proposal was useful because it showed how LLMs can generate cultural interpretation. However, it was not adopted as the final query for two reasons.
+### Gemini result
 
-First, it depended on exact label matching. Second, it included some specific historical and interpretive claims that require careful verification before being represented as RDF.
+![Gemini cultural description CONSTRUCT result](assets/gemini-cultural-result.png)
 
-For this reason, the final project used the simpler ChatGPT-style query with a separate interpretation node and source information.
+This query did not work successfully. It returned an empty HTML Microdata document.
+
+One reason is that it used exact label matching with a language tag. If the label in the endpoint is stored as a plain string or in a slightly different form, the query does not match anything.
 
 ---
 
 # Comparison of ChatGPT and Gemini RDF outputs
 
-| Aspect                    | ChatGPT                             | Gemini                                            |
-| ------------------------- | ----------------------------------- | ------------------------------------------------- |
-| General approach          | Cautious and controlled             | Ambitious and broader                             |
-| Query structure           | Used the selected resource directly | Often searched more broadly or used exact labels  |
-| Use of external resources | Limited                             | Suggested Wikidata, DBpedia, and external classes |
-| SPARQL result             | Worked and generated RDF statements | Some queries returned empty results or timeout    |
-| Main strength             | Practical and easier to test        | Useful for generating enrichment ideas            |
-| Main limitation           | Less semantically ambitious         | Needed more verification and correction           |
+| Aspect            | ChatGPT                                     | Gemini                                                     |
+| ----------------- | ------------------------------------------- | ---------------------------------------------------------- |
+| General approach  | Cautious and controlled                     | Ambitious and broader                                      |
+| RDF triples       | Simpler, closer to the project evidence     | Richer, but sometimes introduced unverified external links |
+| CONSTRUCT queries | Used the selected IRI directly              | Often used exact labels or broader searches                |
+| Endpoint result   | Queries worked and generated RDF statements | Some queries returned empty results or timeout             |
+| Main strength     | Practical and easier to test                | Useful for generating enrichment ideas                     |
+| Main limitation   | Less semantically ambitious                 | Required more correction and verification                  |
+
+---
+
+# Failed or incomplete Gemini query attempts
+
+During testing, some Gemini-based query attempts did not work correctly.
+
+One result returned an empty HTML Microdata document:
+
+![Empty CONSTRUCT result](assets/construct-failed-empty.png)
+
+Another attempt produced a timeout error:
+
+![Timeout result](assets/construct-timeout.png)
+
+These failed results were not used as final enrichment triples. However, they were useful because they showed that SPARQL `CONSTRUCT` queries need to be carefully written.
+
+If the `WHERE` clause is too restrictive, the query may return no results. If the query is too broad, it may exceed the endpoint time limit.
 
 ---
 
@@ -496,48 +586,32 @@ The comparison shows that both LLMs were useful, but in different ways.
 
 ChatGPT was more useful for producing **working RDF triples and CONSTRUCT queries**. Its approach was simpler and more practical because it used the selected Fontana del Nettuno resource directly.
 
-Gemini was useful for generating ideas about possible semantic enrichment, such as external links, stronger typing, and cultural interpretation. However, its proposed queries did not work reliably in the SPARQL endpoint. Some returned empty results, while another caused a timeout.
+Gemini was useful for generating ideas about possible semantic enrichment, such as external authority links, stronger classification, and cultural annotation. However, its proposed queries did not work reliably in the SPARQL endpoint.
 
-This confirms an important methodological point: LLMs can help generate RDF structures, but their outputs must always be checked by humans and tested in a SPARQL endpoint.
-
-For this reason, the final triples used in this project are based mainly on the **working ChatGPT-style CONSTRUCT queries**, while Gemini’s answers are discussed as alternative proposals that were not directly adopted.
-
----
-
-# Failed or incomplete query attempts
-
-During the construction of the RDF triples, some query attempts did not work correctly.
-
-One result returned an **empty HTML Microdata document**, meaning that the query produced no RDF statements.
-
-![Empty CONSTRUCT result](assets/construct-failed-empty.png)
-
-Another attempt produced a timeout error.
-
-![Timeout result](assets/construct-timeout.png)
-
-These failed results were not used as final enrichment triples. However, they were useful because they showed that SPARQL `CONSTRUCT` queries need to be carefully written.
-
-If the `WHERE` clause is too restrictive, the query may return no results. If the query is too broad or complex, it may exceed the endpoint time limit.
+This confirms an important methodological point of the project: LLMs can help generate RDF structures, but their outputs must always be checked by humans and tested in the SPARQL endpoint.
 
 ---
 
 # Triples Summary
 
-| Gap                  | Subject                           | Predicate                        | Object                               |
-| -------------------- | --------------------------------- | -------------------------------- | ------------------------------------ |
-| Location ambiguity   | Fontana del Nettuno main resource | `skos:altLabel`                  | “Fontana del Nettuno di Bologna”     |
-| Location ambiguity   | Fontana del Nettuno main resource | `skos:altLabel`                  | “Fountain of Neptune in Bologna”     |
-| Location ambiguity   | Fontana del Nettuno main resource | `dcterms:spatial`                | Bologna site resource                |
-| Location ambiguity   | Fontana del Nettuno main resource | `schema:location`                | Bologna site resource                |
-| Location ambiguity   | Fontana del Nettuno main resource | `ex:hasDisambiguationNote`       | Location ambiguity note              |
-| Keyword ambiguity    | Fontana del Nettuno main resource | `dcterms:subject`                | `ex:fontana-as-water-feature`        |
-| Keyword ambiguity    | Fontana del Nettuno main resource | `dcterms:type`                   | `ex:fountain-cultural-site`          |
-| Keyword ambiguity    | `ex:fontana-as-water-feature`     | `skos:scopeNote`                 | Explanation of the word “fontana”    |
-| Cultural description | Fontana del Nettuno main resource | `dcterms:description`            | Cultural description of the fountain |
-| Cultural description | Fontana del Nettuno main resource | `a-cd:isSubjectOfInterpretation` | Cultural interpretation node         |
-| Cultural description | Cultural interpretation node      | `dcterms:source`                 | Bologna Welcome and Italia.it        |
-| Cultural description | Cultural interpretation node      | `prov:wasDerivedFrom`            | Bologna Welcome and Italia.it        |
+| Gap                  | Model   | Subject                           | Predicate                        | Object                                    |
+| -------------------- | ------- | --------------------------------- | -------------------------------- | ----------------------------------------- |
+| Location ambiguity   | ChatGPT | Fontana del Nettuno main resource | `skos:altLabel`                  | “Fontana del Nettuno di Bologna”          |
+| Location ambiguity   | ChatGPT | Fontana del Nettuno main resource | `dcterms:spatial`                | Bologna site resource                     |
+| Location ambiguity   | ChatGPT | Fontana del Nettuno main resource | `schema:location`                | Bologna site resource                     |
+| Location ambiguity   | ChatGPT | Fontana del Nettuno main resource | `ex:hasDisambiguationNote`       | Location ambiguity note                   |
+| Location ambiguity   | Gemini  | Fontana del Nettuno main resource | `owl:sameAs`                     | Wikidata / DBpedia resources              |
+| Keyword ambiguity    | ChatGPT | Fontana del Nettuno main resource | `dcterms:subject`                | `ex:fontana-as-water-feature`             |
+| Keyword ambiguity    | ChatGPT | Fontana del Nettuno main resource | `dcterms:type`                   | `ex:fountain-cultural-site`               |
+| Keyword ambiguity    | ChatGPT | `ex:fontana-as-water-feature`     | `skos:scopeNote`                 | Explanation of “fontana” as water feature |
+| Keyword ambiguity    | Gemini  | Fontana del Nettuno main resource | `rdf:type`                       | `dbo:Fountain`, `wd:Q483453`              |
+| Keyword ambiguity    | Gemini  | Fontana-related names             | `rdf:type`                       | Person, artist, organization classes      |
+| Cultural description | ChatGPT | Fontana del Nettuno main resource | `dcterms:description`            | Cultural description                      |
+| Cultural description | ChatGPT | Fontana del Nettuno main resource | `a-cd:isSubjectOfInterpretation` | Cultural interpretation node              |
+| Cultural description | ChatGPT | Cultural interpretation node      | `dcterms:source`                 | Bologna Welcome and Italia.it             |
+| Cultural description | Gemini  | Fontana del Nettuno main resource | `skos:scopeNote`                 | Cultural and symbolic note                |
+| Cultural description | Gemini  | Fontana del Nettuno main resource | `skos:historyNote`               | Urban and historical note                 |
+| Cultural description | Gemini  | Fontana del Nettuno main resource | `skos:editorialNote`             | Artistic interpretation note              |
 
 ---
 
@@ -545,8 +619,8 @@ If the `WHERE` clause is too restrictive, the query may return no results. If th
 
 The proposed RDF triples show how the representation of the **Fontana del Nettuno in Bologna** could be enriched.
 
-The first triple set helps solve the problem of location ambiguity. The second triple set explains why the keyword **fontana** can be ambiguous in ArCo searches. The third triple set adds a cultural interpretation that was not clearly visible in the explored ArCo results.
+The ChatGPT-based triples were more practical because their `CONSTRUCT` queries worked successfully in the SPARQL endpoint. They were therefore used as the main final enrichment proposal.
 
-The experiment also showed that LLMs are useful for generating candidate RDF structures, but their outputs cannot be accepted automatically. In this project, ChatGPT produced the queries that worked successfully in the SPARQL endpoint, while Gemini produced useful but less reliable enrichment proposals.
+The Gemini-based triples were useful as alternative ideas. They suggested external authority links, stronger classification, and richer cultural annotation. However, they were not adopted directly because their `CONSTRUCT` queries either returned empty results or caused a timeout, and some claims required further verification.
 
-The final RDF triples were therefore selected manually, simplified, and checked against the project’s SPARQL results.
+This confirms the central point of the project: LLMs can support Knowledge Graph enrichment, but their outputs must be tested, corrected, and evaluated by humans before being used as RDF enrichment.
