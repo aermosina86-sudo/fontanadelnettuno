@@ -52,7 +52,53 @@ The query returned several resources whose labels contain the expression **“Fo
 
 The results show that ArCo contains more than one resource related to **Fontana del Nettuno**. However, these resources do not all represent the same kind of entity. Some refer to the cultural site itself, while others refer to titles, addresses, units of description, photographs, drawings, or artistic representations of the fountain.
 
-## Query 2 — Finding image-related resources about the Fontana del Nettuno
+## Query 2 — Searching for resources related to Fontana del Nettuno in Bologna
+
+After identifying the main Bologna resource, another query was used to search more broadly for resources whose labels contain both **“Fontana del Nettuno”** and **“Bologna.”**
+
+Unlike the previous query, this query did not restrict the search to `arco:HistoricOrArtisticProperty`. The aim was to see whether other types of resources in ArCo also refer to the Fontana del Nettuno in Bologna.
+
+### SPARQL Query
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?resource ?label
+WHERE {
+  ?resource rdfs:label ?label .
+
+  FILTER(REGEX(STR(?label), "Fontana del Nettuno", "i"))
+  FILTER(REGEX(STR(?label), "Bologna", "i"))
+}
+LIMIT 30
+```
+
+### Results
+
+The query returned several resources related to the Fontana del Nettuno in Bologna.
+
+![Bologna title resources](assets/bologna-title-resources.png)
+
+### Examples of results found
+
+1. [Giambologna. La Fontana del Nettuno. Bologna](https://w3id.org/arco/resource/Title/0800365640-giambologna-la-fontana-del-nettuno-bologna)
+
+2. [Fontana del Nettuno in Bologna / Ortografia](https://w3id.org/arco/resource/Title/0800366448-fontana-del-nettuno-in-bologna-ortografia-rilievi-nella-scala-di-10-cm-%5B%5D-eseguiti-nel-settembre-del-mdcccxcvii-dal-prof-luigi-corsini)
+
+3. [Fontana del Nettuno in Bologna / Iconografia](https://w3id.org/arco/resource/Title/0800366449-fontana-del-nettuno-in-bologna-iconografia-rilievi-nella-scala-di-10-cm-%5B%5D-eseguiti-nel-settembre-del-mdcccxcvii-dal-prof-luigi-corsini)
+
+4. [Bologna. La Piazza Maggiore con la fontana del Nettuno](https://w3id.org/arco/resource/Title/1400042198-bologna-la-piazza-maggiore-con-la-fontana-del-nettuno)
+
+### Interpretation of the Results
+
+The results show that ArCo contains several resources related to the **Fontana del Nettuno in Bologna**, but these resources are not all the main monument resource. In this query, the returned resources are mainly **Title** resources.
+
+This is important because it shows that information about the Fontana del Nettuno in Bologna is distributed across different parts of the knowledge graph. The monument appears through titles, visual records, historic or artistic properties, subjects, and site resources.
+
+This supports one of the main gaps identified in the project: the knowledge about the Fontana del Nettuno exists in ArCo, but it is fragmented across several related resources. For RDF enrichment, these related resources could be connected more explicitly to the main Bologna resource.
+
+
+## Query 3 — Finding image-related resources about the Fontana del Nettuno
 
 In this query, the aim was to find different kinds of visual resources related to the **Fontana del Nettuno in Bologna**. Instead of looking only for direct `foaf:depiction` links, the query searches more broadly for image-related records, including photographs, postcards, prints, drawings, negatives, and other visual representations.
 
@@ -125,7 +171,7 @@ The results show that ArCo and ICCD contain many visual records connected to the
 
 This shows that the Fontana del Nettuno is represented not only as a single cultural site, but also through a wider network of visual resources. However, not every result contains a direct `foaf:depiction` link, which suggests that image-related information exists in the dataset but is not always represented in a simple or uniform way.
 
-## Query 3 — Identifying subjects related to the Fontana del Nettuno
+## Query 4 — Identifying subjects related to the Fontana del Nettuno
 
 This query was designed to find unique resources that are classified as **Subjects** in the ArCo ontology and whose labels include the words **“Fontana”** and **“Nettuno.”**
 
@@ -180,7 +226,7 @@ The results show that ArCo does contain subject resources related to the Fontana
 
 However, the subject labels are not completely uniform. Some labels refer directly to the fountain, while others include additional contextual information, such as Bologna, Piazza del Nettuno, Palazzo Re Enzo, Giambologna, or specific visual scenes. This suggests that the topic is represented in ArCo, but its subject representation is distributed across several differently named resources.
 
-## Query 4 — Using UNION to retrieve multiple naming patterns
+## Query 5 — Using UNION to retrieve multiple naming patterns
 
 In this query, we explored whether the **Fontana del Nettuno** appears in ArCo through different naming patterns. In particular, we wanted to compare the standard name **“Fontana del Nettuno”** with the alternative expression **“Gigante”**, which is sometimes associated with the fountain.
 
@@ -257,7 +303,7 @@ For this reason, the query required manual filtering. The most relevant results 
 
 This query shows that the representation of the Fontana del Nettuno is distributed across several labels and resource types. It also suggests a possible information gap: the relationship between the standard name **“Fontana del Nettuno”** and the alternative denomination **“detta del Gigante”** could be made more explicit in RDF.
 
-## Query 5 — General search for “fontana” entities
+## Query 6 — General search for “fontana” entities
 
 After gathering specific data about the **Fontana del Nettuno**, we broadened the research by exploring other entities in ArCo whose labels contain the word **“fontana.”**
 
@@ -331,7 +377,7 @@ This query therefore helped us understand that a general search using only the w
 
 This shows why more specific queries are needed when working with SPARQL and cultural heritage data. It also confirms that the Fontana del Nettuno should be studied with more precise label patterns, such as **“Fontana del Nettuno,” “Bologna,”** or related subject resources.
 
-## Query 6 — Investigating used properties for “fontana”
+## Query 7 — Investigating used properties for “fontana”
 
 The aim of this query was to understand which properties and values are commonly used to describe entities whose labels contain the word **“fontana”** in the ArCo dataset.
 
@@ -406,112 +452,3 @@ This query was useful because it showed that the term **“fontana”** alone is
 
 The query also helped us inspect the RDF structure of fountain-related resources. By looking at the `?property` and `?value` columns, it becomes possible to see which predicates are commonly used in ArCo descriptions. This is important for the enrichment phase, because proposed RDF triples should use vocabulary that is compatible with the existing structure of the knowledge graph.
 
-## Query 7 — Investigating artist, creator, and place-related information
-
-After identifying several resources related to the **Fontana del Nettuno**, this query was designed to investigate whether ArCo contains information about artists, creators, agents, and places connected to the monument.
-
-The aim was to check whether the selected resources are directly connected to people such as **Giambologna**, or to places such as **Bologna**, **Piazza del Nettuno**, or **Palazzo Re Enzo**. This is important because the project does not only search for labels, but also tries to understand how relationships are structured in the knowledge graph.
-
-This query uses two additional SPARQL features: `VALUES` and `BIND`.
-
-### Explanation of keywords used
-
-**VALUES**: limits the query to a specific list of IRIs that were already identified as relevant to the project.
-
-**BIND**: creates a new variable. In this query, it creates `?searchText`, which combines the property, value, and labels into one searchable text.
-
-**FILTER** and **REGEX**: search inside the combined text for artist-related and place-related words, such as “Giambologna,” “Bologna,” “Piazza,” “Palazzo,” “place,” and “location.”
-
-**OPTIONAL**: retrieves labels for the topic, property, and value only if they are available.
-
-**ORDER BY**: organizes the results by topic and property.
-
-**LIMIT**: limits the output to 100 results.
-
-### SPARQL Query
-
-```sparql
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
-PREFIX cis: <http://dati.beniculturali.it/cis/>
-
-SELECT DISTINCT ?topic ?topicLabel ?property ?propertyLabel ?value ?valueLabel ?matchType
-WHERE {
-  VALUES ?topic {
-    <http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S015658_Fontana_del_Nettuno>
-    <http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante>
-    <https://w3id.org/arco/resource/Subject/740679cbe96f6c4c7d6c9da040c4d242>
-    <https://w3id.org/arco/resource/Subject/1c81f0efabe53549630809ab6fd79047>
-    <https://w3id.org/arco/resource/Subject/21c4ddfe628b306443993418d67a87e8>
-  }
-
-  ?topic ?property ?value .
-
-  OPTIONAL { ?topic rdfs:label ?topicLabel . }
-  OPTIONAL { ?property rdfs:label ?propertyLabel . }
-  OPTIONAL { ?value rdfs:label ?valueLabel . }
-
-  BIND(
-    CONCAT(
-      STR(?property), " ",
-      STR(?value), " ",
-      COALESCE(STR(?propertyLabel), ""), " ",
-      COALESCE(STR(?valueLabel), "")
-    )
-    AS ?searchText
-  )
-
-  FILTER(REGEX(?searchText, "Giambologna|Boulogne|artist|author|creator|agent|place|location|Bologna|Piazza|Palazzo|address|sede|luogo", "i"))
-
-  BIND("artist / creator / place-related information" AS ?matchType)
-}
-ORDER BY ?topic ?property
-LIMIT 100
-```
-
-### Results
-
-The query returned information related to places, subjects, and photographic or artistic records connected to the Fontana del Nettuno.
-
-![Query 7 results](assets/query7.png)
-
-### Examples of results found
-
-1. [Fontana del Nettuno, detta del Gigante](http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante)
-   Property: `cis:hasSite`
-   Value: [Sito di S001886 Fontana del Nettuno, detta del Gigante](http://dati.beniculturali.it/iccd/schede/resource/Site/Sito_di_S001886_Fontana_del_Nettuno,_detta_del_Gigante)
-   Value label: “BOLOGNA”
-
-2. [Fontana del Nettuno](http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S015658_Fontana_del_Nettuno)
-   Property: `cis:hasSite`
-   Value: [Sito di S015658 Fontana del Nettuno](http://dati.beniculturali.it/iccd/schede/resource/Site/Sito_di_S015658_Fontana_del_Nettuno)
-   Value label: “ROMA”
-
-3. [Subject: Italia - Emilia Romagna - Bologna - Piazza Del Nettuno - Palazzo Re Enzo - Fontana Del Nettuno](https://w3id.org/arco/resource/Subject/1c81f0efabe53549630809ab6fd79047)
-   Property: `a-cd:isSubjectOf`
-   Value: [PhotographicHeritage/0800633982](https://w3id.org/arco/resource/PhotographicHeritage/0800633982)
-   Value label includes: “Italia - Emilia Romagna - Bologna - Piazza del Nettuno - Palazzo Re Enzo - Fontana del Nettuno”
-
-4. [Subject: Fontana Del Nettuno A Bologna](https://w3id.org/arco/resource/Subject/21c4ddfe628b306443993418d67a87e8)
-   Property: `a-cd:isSubjectOf`
-   Value: [HistoricOrArtisticProperty/0300639021](https://w3id.org/arco/resource/HistoricOrArtisticProperty/0300639021)
-   Value label: “Bologna: Nettuno, Fontana del Nettuno a Bologna (stampa) by Bucci Anselmo”
-
-5. [Subject: De Boulogne J. (detto Giambologna)/ Fontana Del Nettuno/ Bologna](https://w3id.org/arco/resource/Subject/740679cbe96f6c4c7d6c9da040c4d242)
-   Property: `a-cd:isSubjectOf`
-   Value: [PhotographicHeritage/0800365640](https://w3id.org/arco/resource/PhotographicHeritage/0800365640)
-   Value label includes: “De Boulogne J. (detto Giambologna)/ Fontana del Nettuno/ Bologna”
-
-### Interpretation of the Results
-
-The results show that place-related information is present in the dataset, but it is not completely straightforward. The resource labelled **“Fontana del Nettuno, detta del Gigante”** is connected through `cis:hasSite` to a site labelled **“BOLOGNA.”** This makes it highly relevant for the project.
-
-However, the simpler resource labelled **“Fontana del Nettuno”** is connected through `cis:hasSite` to a site labelled **“ROMA.”** This suggests that this resource may refer to a different Fontana del Nettuno, not the Bologna monument. For this reason, the query helped clarify that not every resource with the label “Fontana del Nettuno” is suitable for the project.
-
-The query also retrieved several subject resources related to Bologna, Piazza del Nettuno, Palazzo Re Enzo, and Giambologna. These resources are connected to photographic heritage or historic/artistic property records through `a-cd:isSubjectOf`.
-
-This is important because it shows that ArCo contains information about **Giambologna** and the **Bologna location**, but this information often appears inside subject labels or related photographic records rather than as a direct, clean artist or creator relation for the main monument.
-
-For the project, this result identifies a possible information gap. The relationship between the Bologna Fontana del Nettuno, its alternative name **“detta del Gigante,”** its location in Bologna, and its connection to **Giambologna** could be represented more explicitly through RDF triples.
