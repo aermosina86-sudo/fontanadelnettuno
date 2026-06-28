@@ -541,23 +541,6 @@ One reason is that it used exact label matching with a language tag. If the labe
 | Main strength     | Practical and easier to test                | Useful for generating enrichment ideas                     |
 | Main limitation   | Less semantically ambitious                 | Required more correction and verification                  |
 
----
-
-# Failed or incomplete Gemini query attempts
-
-During testing, some Gemini-based query attempts did not work correctly.
-
-One result returned an empty HTML Microdata document:
-
-![Empty CONSTRUCT result](assets/construct-failed-empty.png)
-
-Another attempt produced a timeout error:
-
-![Timeout result](assets/construct-timeout.png)
-
-These failed results were not used as final enrichment triples. However, they were useful because they showed that SPARQL `CONSTRUCT` queries need to be carefully written.
-
-If the `WHERE` clause is too restrictive, the query may return no results. If the query is too broad, it may exceed the endpoint time limit.
 
 ---
 
