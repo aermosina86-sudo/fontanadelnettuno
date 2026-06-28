@@ -236,11 +236,12 @@ construct-failed-empty.png
 construct-timeout.png
 ```
 
-Then the images were inserted with Markdown:
+Then the images were inserted using this Markdown format:
 
-```markdown
-![Location CONSTRUCT result](assets/construct-location-result.png)
-```
+`![Location CONSTRUCT result](assets/construct-location-result.png)`
+
+This made the website more stable and easier to manage.
+
 
 This made the website more stable and easier to manage.
 
