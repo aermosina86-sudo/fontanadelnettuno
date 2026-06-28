@@ -27,13 +27,10 @@ This issue already appeared in **Query 1**, where a broad label search was used 
 
 This means that searching only by name can be misleading. A resource may contain the words **“Fontana del Nettuno”** in its label, but it may not refer to the specific monument in Bologna selected for this project.
 
-Query 7 made this problem clearer. It showed that one resource labelled **“Fontana del Nettuno, detta del Gigante”** is connected to **BOLOGNA**, while another resource labelled simply **“Fontana del Nettuno”** is connected to **ROMA**.
 
 ### Evidence from the SPARQL queries
 
 Query 1 showed that there are multiple resources containing the expression **“Fontana del Nettuno.”** This already suggested that the name is not unique in the dataset.
-
-Query 7 then helped distinguish between similar resources by checking place-related information. The relevant results were:
 
 ```text
 Fontana del Nettuno, detta del Gigante → BOLOGNA
@@ -44,8 +41,6 @@ Fontana del Nettuno → ROMA
 ### Interpretation
 
 These results show that the expression **“Fontana del Nettuno”** is ambiguous in the ArCo Knowledge Graph. Without checking the place or site connected to the resource, it is possible to select the wrong entity.
-
-For this project, the correct resource is:
 
 ```text
 http://dati.beniculturali.it/iccd/schede/resource/CulturalInstituteOrSite/S001886_Fontana_del_Nettuno,_detta_del_Gigante
